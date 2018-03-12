@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-8">
+			<div class="card mb-3">
+			  <h3 class="card-header">¡Hola {{ user.first_name }}!</h3>
+			  <div class="card-body">
+			    <h5 class="card-title">Este es tu perfil</h5>
+			    <h6 class="card-subtitle text-muted">No se que poner aqui</h6>
+			  </div>
+			  <div class="card-body">
+			    <p class="card-text">
+			    	ni aqui: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, atque.
+			    </p>
+			  </div>
+			  <ul class="list-group list-group-flush">
+			    <li class="list-group-item">Cedula: V-{{ user.cliente.cedula }}</li>
+			    <li class="list-group-item">Nombre: {{ user.first_name }} {{ user.last_name }}</li>
+			    <li class="list-group-item">Email: {{ user.email }}</li>
+			    <li class="list-group-item">Telefono: {{ user.cliente.telefono }}</li>
+			  </ul>
+			  <div class="card-body">
+			    <a href="{% url 'cliente:editar' user.id %}" class="card-link btn btn-primary">Modificar Perfil</a>
+			    <a href="{% url 'home:index' %}" class="card-link">Volver</a>
+			  </div>
+			  <div class="card-footer text-muted">
+			    Ultima Sesión: {{ user.last_login }}
+			  </div>
+			</div>
+
+		</div>
+		<div class="col-md-4">
+			<div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+			  <div class="card-header">Gestiones</div>
+			  <div class="card-body">
+			    <h4 class="card-title">Viajes: </h4>
+			    <p>Realizados: 3</p>
+			    <p>Cancelados: 2</p>
+			    <p>Reservados: 3</p>
+			    <p>Cancelados: 7</p>
+			  </div>
+			</div>
+			<div class="card border-info mb-3" style="max-width: 20rem;">
+			  <div class="card-header">Otras Gestiones</div>
+			  <div class="card-body">
+			    <h4 class="card-title">Otros datos</h4>
+			    <p class="card-text">Ultimo chofer: Patricio</p>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}

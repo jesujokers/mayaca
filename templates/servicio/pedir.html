@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBzq5jw8k2nNtCAg6jItQ5B_8z6Zi7IuSA'></script>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/servicio/estilos.css' %}">
+<script src="{% static 'js/servicio/mapa.js' %}"></script>
+	<div id="map-canvas"></div>
+
+	<div id="logo" class="buscador" style="z-index: 2001; left: 0; top: 0; width: 185px; height: 60px; background: #2C3E50; opacity: 0.8;">
+		<a class="navbar-brand" href="{% url 'home:index' %}">
+		  	<img src="{% static 'img/icono.ico' %}" alt="">
+		  	MayacaExpress
+		  </a>
+	</div>
+
+	<div class="buscador card border-success mb-3 formulario" style="max-width: 280px;" class="form-control">
+		<form action="{% url 'servicio:confirmar' %}" method="POST" id="formulario">
+			{% csrf_token %}
+				<div class="form-group">
+				  <input type="text" class="form-control" placeholder="Origen" id="origen">
+				  <input type="hidden" name="origen" id="origen">
+				</div>
+				<div class="form-group">
+				  <input type="text" class="form-control" placeholder="Destino" id="destino" name="destino">
+				  <input type="hidden" name="destino" id="destino">
+					<input type="hidden" name="distancia" id="distancia" class="form-control distancia-form" style="display: none">
+				</div>
+			<button type="button" class="btn btn-primary" id="calcular">Calcular</button>
+			<button type="submit" class="btn btn-success" style="margin-top: 2px; display: none;" id="btn-confirmar">Confirmar</button>
+		</form>
+		<div id="directionsPanel">
+			<p>
+				Distancia total: <strong><span id="total"></span></strong>
+				<img src="{% static 'img/loading.gif' %}" alt="" width="25px" id="cargando" style="display: none">
+			</p>
+		</div>
+	</div>
+<script>
+	var bandera = false
+
+	 $("#formulario").submit(function() {
+      if (bandera == false) {
+        return false;
+      } else 
+          return true;      
+    });
+
+ $(window).resize(function(){
+  
+  var anchoVentana = $(window).width();
+      var anchoFormulario = $('.formulario').width();
+
+      $('.formulario').css({
+        'left': ((anchoVentana - anchoFormulario )/2) - 12
+    });
+
+
+});
+
+ var anchoVentana = $(window).width();
+      var anchoFormulario = $('.formulario').width();
+
+      $('.formulario').css({
+        'left': ((anchoVentana - anchoFormulario )/2) - 12
+    });
+</script>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

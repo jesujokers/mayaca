@@ -1,0 +1,32 @@
+footer {
+  margin-top: 55px;
+  padding: 20px;
+  background: #2C3E50;
+  color: #fff; }
+  footer .sociales {
+    margin: 10px; }
+    footer .sociales a {
+      font-size: 24px;
+      padding: 10px 12px;
+      -webkit-transition: all 0.3s ease;
+      -o-transition: all 0.3s ease;
+      transition: all 0.3s ease;
+      border-radius: 4px; }
+
+.facebook:hover {
+  background: #3b5998;
+  color: #fff; }
+
+.instagram:hover {
+  background: #8a3ab9;
+  color: #fff; }
+
+.twitter:hover {
+  background: #1dcaff;
+  color: #fff; }
+
+.pinterest:hover {
+  background: #cb2027;
+  color: #fff; }
+
+/*# sourceMappingURL=estilos.css.map */

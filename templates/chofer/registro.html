@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<form action="" method="POST">
+				{% csrf_token %}
+				{{ user_form.as_p }}
+				{{ chofer_form.as_p }}
+				<input type="submit" class="btn btn-primary" value="Registrar">
+				<a href="{% url 'home:index' %}" class="btn btn-default">Cancelar</a>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock content %}

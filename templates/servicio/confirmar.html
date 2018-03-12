@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 wrap">
+			<h2>Para confirmar el viaje complete el formulario: </h2>
+			{% if origen %}
+				<div class="form-group">
+					<p>Origen: <strong>{{ origen }}</strong></p>
+					<p>Destino: <strong>{{ destino }}</strong></p>
+					<p>Cliente: <strong>Jonnathan</strong></p>
+					<p>Distancia: <strong>{{ distancia }} Km</strong></p>
+					<p>Precio: {{ precio }} <i class="fa fa-usd" aria-hidden="true"></i></p>
+				</div>
+				<div class="form-group radio">
+
+					<h3>Indique la fecha:</h3>
+
+					<label for="ahora">Ahora</label>
+					<input type="radio" value="Ahora" name="fecha" id="ahora">
+
+					<label for="reservar">Reservar</label>
+					<input type="radio" value="Reservar" name="fecha" id="reservar">
+
+				</div>
+					<input type="date" class="form-control" min="2018-03-03">
+			{% endif %}
+			<a href="#" class="btn btn-primary">Confirmar y Pedir</a>
+			<a href="{% url 'servicio:pedir' %}" class="btn btn-default">Cancelar</a>
+		</div>
+	</div>
+</div>
+{% endblock %}

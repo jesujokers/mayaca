@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+	{% if usuario %}
+
+	    <h2>Holaaaa {{ empleado.usuario_id }}¡</h2>
+	
+	{% endif %}
+	<div class="row">
+		<div class="col-md-8">
+			<div class="card mb-3">
+			  <h3 class="card-header">¡Hola {{ empleado.usuario.username }}!</h3>
+			  <div class="card-body">
+			    <h5 class="card-title">Este es tu perfil</h5>
+			    <h6 class="card-subtitle text-muted">No se que poner aqui</h6>
+			  </div>
+			  <div class="card-body">
+			    <p class="card-text">
+			    	ni aqui: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, atque.
+			    </p>
+			  </div>
+			  <ul class="list-group list-group-flush">
+			    <li class="list-group-item">Cedula: V-{{ empleado.usuario.cedula }}</li>
+			    <li class="list-group-item">Nombre: {{ usuario.first_name }} {{ usuario.last_name }}</li>
+			    <li class="list-group-item">Email: {{ usuario.email }}</li>
+			    <li class="list-group-item">Telefono: {{ usuario.empleado.telefono }}</li>
+			    <li class="list-group-item">Fecha de nacimiento: {{ usuario.empleado.fecha_nacimiento }}</li>
+			    <li class="list-group-item">Direccion: {{ usuario.empleado.direccion }}</li>
+			    <li class="list-group-item">Sueldo: {{ usuario.empleado.sueldo }}</li>
+			    <li class="list-group-item">Rol: {{ usuario.empleado.rol }}</li>
+
+			  </ul>
+			  <div class="card-body">
+			    <a href="{% url 'cliente:editar' user.id %}" class="card-link btn btn-primary">Modificar Perfil</a>
+			    <a href="{% url 'home:index' %}" class="card-link">Volver</a>
+			  </div>
+			  <div class="card-footer text-muted">
+			    Ultima Sesión: {{ empleado.usuario.last_login }}
+			  </div>
+			</div>
+
+		</div>
+		<div class="col-md-4">
+			<div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+			  <div class="card-header">Gestiones</div>
+			  <div class="card-body">
+			    <h4 class="card-title">Operaciones: </h4>
+			    <h5>Usuarios:</h5>
+			    <p>Usuarios registrados: 3</p>
+			    <p>Usuarios Suspendidos: 2</p>
+			    <p>Usuarios Eliminados: 3</p>
+			    <p>Usuarios Editados: 7</p>
+			    <h5>Empleados:</h5>
+			    <p>Empleados registrados: 3</p>
+			    <p>Empleados Suspendidos: 2</p>
+			    <p>Empleados Eliminados: 3</p>
+			    <p>Empleados Editados: 7</p>
+			  </div>
+			</div>
+			<div class="card border-info mb-3" style="max-width: 20rem;">
+			  <div class="card-header">Viajes</div>
+			  <div class="card-body">
+			    <p class="card-text">Viajes Registrados: 2</p>
+			    <p class="card-text">Viajes Cancelados: 2</p>
+			    <p class="card-text">Viajes Completados: 2</p>
+			    <p class="card-text">Viajes Totales: 6</p>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}

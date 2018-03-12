@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<form action="" method="POST" class="form-group">
+				{% csrf_token %}
+				<h2>Confirmacion</h2>
+				<hr>
+				<p>Esta seguro que desea eliminar el usuario: {{ object }}</p>
+				<button type="submit" class="btn btn-primary">Confirmar</button>
+				<a href="{% url 'administracion:listar' %}" class="btn btn-default">Cancelar</a>
+			</form>
+		</div>
+		<div class="col-md-4"></div>
+	</div>
+</div>
+{% endblock %}

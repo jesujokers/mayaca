@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- =================== Tabla de Empleados ======================= -->
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Correo Electrónico</th>
+            <th scope="col">Rol</th>
+            <th class="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if empleados %}
+          	{% for empleado in empleados %}
+      		    <tr>
+      		      <th scope="row">{{ empleado.usuario.id }}</th>
+      		      <td>{{ empleado.usuario.username }}</td>
+      		      <td>{{ empleado.usuario.first_name }} {{ empleado.usuario.last_name }}</td>
+      		      <td>{{ empleado.usuario.email }}</td>
+      		      <td>{{ empleado.rol }}</td>
+      		      <td>
+      		      	<a href="{% url 'administracion:eliminar' empleado.id %}" class="btn btn-danger" title="Eliminar"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                  {% if empleado.is_active == 1 %}
+      		      	<a href="{% url 'administracion:suspender' empleado.id %}" class="btn btn-warning" title="Suspender"><i class="fa fa-lock" aria-hidden="true"></i></a>
+                  {% else %}
+                  <a href="{% url 'administracion:habilitar' empleado.id %}" class="btn btn-success" title="Habilitar"><i class="fa fa-unlock" aria-hidden="true"></i></a>
+                  {% endif %}
+                  <a href="{% url 'administracion:editar' empleado.id %}" class="btn btn-primary" title="Editar"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                  <a href="{% url 'administracion:perfil' empleado.usuario_id %}" class="btn btn-info" title="Perfil">Perfil</i></a>
+
+      		      </td>
+      		    </tr>
+          	{% endfor %}
+          {% else %}
+          <h2>No hay Registros Disponibles</h2>
+          {% endif %}
+        </tbody>
+      </table> 
+  <!-- =================== FinTabla de Empleados ======================= -->
+    </div>
+  </div>
+  <!-- <div class="row">
+    <div class="col-md-4"></div>
+      <div class="col-md-4">
+        {% if page_obj.has_previous %}
+          <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-success">Anterior</a>
+        {% endif %}{% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-success">Siguiente</a>
+        {% endif %}     
+      </div>
+    <div class="col-md-4"></div>
+  </div> -->
+
+
+</div>
+
+
+
+
+{% endblock %}
