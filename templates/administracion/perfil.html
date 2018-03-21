@@ -2,15 +2,10 @@
 
 {% block content %}
 <div class="container">
-	{% if usuario %}
-
-	    <h2>Holaaaa {{ empleado.usuario_id }}¡</h2>
-	
-	{% endif %}
 	<div class="row">
 		<div class="col-md-8">
 			<div class="card mb-3">
-			  <h3 class="card-header">¡Hola {{ empleado.usuario.username }}!</h3>
+			  <h3 class="card-header">¡Hola {{ usuario.first_name }}!</h3>
 			  <div class="card-body">
 			    <h5 class="card-title">Este es tu perfil</h5>
 			    <h6 class="card-subtitle text-muted">No se que poner aqui</h6>
@@ -21,22 +16,22 @@
 			    </p>
 			  </div>
 			  <ul class="list-group list-group-flush">
-			    <li class="list-group-item">Cedula: V-{{ empleado.usuario.cedula }}</li>
-			    <li class="list-group-item">Nombre: {{ usuario.first_name }} {{ usuario.last_name }}</li>
-			    <li class="list-group-item">Email: {{ usuario.email }}</li>
-			    <li class="list-group-item">Telefono: {{ usuario.empleado.telefono }}</li>
-			    <li class="list-group-item">Fecha de nacimiento: {{ usuario.empleado.fecha_nacimiento }}</li>
-			    <li class="list-group-item">Direccion: {{ usuario.empleado.direccion }}</li>
-			    <li class="list-group-item">Sueldo: {{ usuario.empleado.sueldo }}</li>
-			    <li class="list-group-item">Rol: {{ usuario.empleado.rol }}</li>
+			    <li class="list-group-item"><strong>Cedula:</strong> V-{{ usuario.empleado.cedula }}</li>
+			    <li class="list-group-item"><strong>Nombre:</strong> {{ usuario.first_name }} {{ usuario.last_name }}</li>
+			    <li class="list-group-item"><strong>Email:</strong> {{ usuario.email }}</li>
+			    <li class="list-group-item"><strong>Telefono:</strong> {{ usuario.empleado.telefono }}</li>
+			    <li class="list-group-item"><strong>Fecha de nacimiento:</strong> {{ usuario.empleado.fecha_nacimiento }}</li>
+			    <li class="list-group-item"><strong>Direccion:</strong> {{ usuario.empleado.direccion }}</li>
+			    <li class="list-group-item"><strong>Sueldo:</strong> {{ usuario.empleado.sueldo }}</li>
+			    <li class="list-group-item"><strong>Rol:</strong> {{ usuario.empleado.rol }}</li>
 
 			  </ul>
 			  <div class="card-body">
-			    <a href="{% url 'cliente:editar' user.id %}" class="card-link btn btn-primary">Modificar Perfil</a>
-			    <a href="{% url 'home:index' %}" class="card-link">Volver</a>
+			    <a href="#" class="card-link btn btn-primary">Modificar Perfil (Falta configurar)</a>
+			    <a href="{% url 'administracion:listar' %}" class="card-link">Volver</a>
 			  </div>
 			  <div class="card-footer text-muted">
-			    Ultima Sesión: {{ empleado.usuario.last_login }}
+			    Ultima Sesión: {{ usuario.last_login }}
 			  </div>
 			</div>
 

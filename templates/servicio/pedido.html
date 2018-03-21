@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+    	<div class="row">
+    		<div class="col-md-12">
+    			<h2>¡Taxi pedido!</h2>
+    			<p>Número de solicitud: #{{ viaje.id }}</p>
+    			<p>Origen: {{ distancia.origen }}</p>
+    			<p>Destino: {{ distancia.destino }}</p>
+    			<p>Precio: Bs. {{ viaje.precio }} </p>
+    			<p>Nombre del Chofer: Guillermo</p>
+    		</div>
+    	</div>
+    </div>
+{% endblock content %}

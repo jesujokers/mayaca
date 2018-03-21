@@ -53,4 +53,6 @@ def EditarChofer(request, id_chofer):
 		})
 
 
-	
+def PerfilChofer(request, id_chofer):
+	chofer = User.objects.get(id = id_chofer)
+	return render(request, 'chofer/perfil.html', {'chofer': chofer})

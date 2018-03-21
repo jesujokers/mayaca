@@ -35,8 +35,13 @@
 		        	<a class="nav-link" href="{% url 'servicio:index' %}">Servicio</a>
 		        {% endif %}
 		      </li>
-		      <li class="nav-item {% block acerca-de %}{% endblock %}">
+		      {% if not user.is_authenticated %}
+		      <li class="nav-item {% block chofer %}{% endblock %}">
 		        <a class="nav-link" href="{% url 'chofer:index' %}">Unete a nuestra empresa</a>
+		      </li>
+		      {% endif %}
+		      <li class="nav-item {% block acerca_de %}{% endblock %}">
+		        <a class="nav-link" href="#">Acerca de</a>
 		      </li>
 		    </ul>
 		{% if user.is_authenticated %}
@@ -47,7 +52,7 @@
 			  		<i class="fa fa-taxi" aria-hidden="true"></i>   
 					{% elif user.cliente %}
 			  		<i class="fa fa-user-o" aria-hidden="true"></i> 
-			  		{% elif user.empleado.rol == 'empleado' %}
+			  		{% elif user.empleado.rol == 'Empleado' %}
 			  		<i class="fa fa-id-card" aria-hidden="true"></i>
 			  		{% elif user.empleado or user %}
 			  		<i class="fa fa-steam" aria-hidden="true"></i>
@@ -59,24 +64,35 @@
 			    	    {% endif %}
 			    </a>
 			    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;">
+			      <a class="dropdown-item" href="#">Configuracion <i class="fa fa-wrench" aria-hidden="true"></i></a>
+			    	 <!-- ================== Modificar Perfil ===============  -->
 			      {% if user.cliente %}
 			      <a class="dropdown-item" href="{% url 'cliente:editar' user.id %}">Modificar perfil  <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 			      {% elif user.chofer %}
 			      <a class="dropdown-item" href="{% url 'chofer:editar' user.id %}">Modificar perfil  <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 			      {% endif %}
-
-			      <a class="dropdown-item" href="#">Configuracion <i class="fa fa-wrench" aria-hidden="true"></i>
-</a>
-				  {% if not user.cliente or not user.chofer  %}
-			      <a class="dropdown-item" href="{% url 'administracion:listar' %}">Administrar <i class="fa fa-binoculars" aria-hidden="true"></i>
+			      <!-- ================== Administrar ====================  -->
+				  {% if user.empleado or not user.cliente  %}
+			      <a class="dropdown-item" href="{% url 'administracion:panel' %}">Administrar <i class="fa fa-binoculars" aria-hidden="true"></i></a>
 				  {% endif %}
-</a>
-			      <a class="dropdown-item" href="{% url 'cliente:perfil' user.id %}">Perfil <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-</a>
+
+				  <!-- ====================== -->
+				  {% if user.cliente %}
+				  <a class="dropdown-item" href="{% url 'cliente:viajes' user.cliente.id %}">Viajes <i class="fa fa-binoculars" aria-hidden="true"></i></a>    
+				  {% endif %}
+				  <!-- ====================== -->
+
+				  <!-- =============== Perfil ===================== -->
+				  {% if user.cliente %}
+			      <a class="dropdown-item" href="{% url 'cliente:perfil' user.id %}">Perfil <i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+				  {% elif user.chofer %}
+				  <a class="dropdown-item" href="{% url 'chofer:perfil' user.id %}">Perfil <i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+				  {% elif user.empleado or user %}
+			      <a class="dropdown-item" href="{% url 'administracion:perfil' user.id %}">Perfil <i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+				  {% endif %}
+				  <!-- ====================== Log Out ====================== -->
 			      <div class="dropdown-divider"></div>
-			      
-			      <a class="dropdown-item" href="{% url 'logout' %}">Salir <i class="fa fa-sign-out" aria-hidden="true"></i>
-</a>
+			      <a class="dropdown-item" href="{% url 'logout' %}">Salir <i class="fa fa-sign-out" aria-hidden="true"></i></a>
 			    </div>
 			  </li>
 			  <li class="nav-item">
@@ -87,7 +103,8 @@
     	{% else %}
     			<ul class="nav nav-pills">
     				 <li class="nav-item">
-				        <a class="nav-link" href="{% url 'login' %}">Ingresar</a>
+				        <a class="nav-link" href="{% url 'login' %}">Ingresar <i class="fa fa-sign-in" aria-hidden="true"></i>
+</a>
 				      </li>
 				      <li class="nav-item">
 				        <a class="nav-link" href="{% url 'cliente:registrar' %}">Registrarse</a>
@@ -125,8 +142,8 @@
 		</footer>
 	{% endblock %}
 	<script src="{% static 'js/jquery.min.js' %}"></script>
-	<script src="{% static 'js/jquery.min.js' %}"></script>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="{% static 'js/servicio/confirmar.js' %}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>

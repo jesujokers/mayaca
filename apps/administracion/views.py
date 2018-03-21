@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy,reverse
+from apps.servicio.models import *
 
 # from django.urls import reverse
 # from django.utils.functional import lazy
@@ -102,5 +103,21 @@ def ListarEmpleado(request):
 	return render(request, 'administracion/lista.html', contexto)
 
 def PerfilEmpleado(request, id_usuario):
-	empleado = Empleado.objects.filter(usuario_id = id_usuario)
-	return render(request, 'administracion/perfil.html', {'empleado':empleado})
+	usuario = User.objects.get(id = id_usuario)
+	return render(request, 'administracion/perfil.html', {'usuario':usuario})
+
+def GestionViajes(request):
+	viajes = Viaje.objects.all()
+	viajes_p = Viaje.objects.filter(estado = 'P')
+	viajes_c = Viaje.objects.filter( estado = 'C')
+	viajes_r = Viaje.objects.filter( estado = 'R')
+	contexto = {
+	'viajes': viajes,
+	'viajes_p': viajes_p,
+	'viajes_c': viajes_c,
+	'viajes_r': viajes_r,
+	}
+	return render(request, 'administracion/viajes.html', contexto)
+
+def Panel(request):
+	return render(request, 'administracion/panel.html')

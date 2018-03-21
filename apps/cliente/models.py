@@ -6,7 +6,7 @@ from datetime import date, datetime
 
 class Cliente(models.Model):
 	usuario = models.OneToOneField(User, on_delete = models.CASCADE)
-	cedula = models.CharField(max_length = 10)
+	cedula = models.CharField(max_length = 10, unique = True)
 	telefono = models.CharField(max_length = 12)
 	rol = models.CharField(max_length = 20)
 

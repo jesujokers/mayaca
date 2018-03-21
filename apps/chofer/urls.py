@@ -7,4 +7,5 @@ urlpatterns = [
 	path('', index, name = 'index'),
 	path('registrar/', RegistrarChofer, name = 'registrar'),
 	path('editar/<int:id_chofer>/', EditarChofer, name = 'editar'),
+	path('perfil/<int:id_chofer>/', PerfilChofer, name = 'perfil'),
 ]

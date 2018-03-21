@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<ul class="nav nav-tabs">
+			  <li class="nav-item">
+			    <a class="nav-link" data-toggle="tab" href="#viajes">Viajes</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link active show" data-toggle="tab" href="#viaje_p">Viajes Pendientes</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" data-toggle="tab" href="#viaje_r">Viajes Realizados</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" data-toggle="tab" href="#viaje_c">Viajes Cancelados</a>
+			  </li>
+			  <!-- <li class="nav-item">
+			    <a class="nav-link disabled" href="#">Disabled</a>
+			  </li> -->
+			</ul>
+			<div id="myTabContent" class="tab-content">
+			  <div class="tab-pane fade" id="viajes">
+				<table class="table table-hover">
+				  <thead>
+				    <tr>
+				      <th scope="col">ID</th>
+				      <th scope="col">Chofer</th>
+				      <th scope="col">Precio</th>
+				      <th scope="col">Fecha de Solicitud</th>
+				      <th scope="col">Acciones</th
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	{% if  viajes %}
+				  	{% for viaje in viajes %}
+				  	<tr class="table-success">
+				      <th scope="row">{{ viaje.id }}</th>
+				      <td>{{ viaje.chofer.usuario.first_name }}</td>
+				      <td>{{ viaje.precio }}</td>
+				      <td>{{ viaje.fecha_so }}</td>
+				      <td><a href="#" class="btn btn-info">Ver</a></td>
+				    </tr>
+				    {% endfor %}
+				  	{% endif %}
+				  </tbody>
+				</table> 
+			  </div>
+			  <div class="tab-pane fade  active show" id="viaje_p">
+			    <table class="table table-hover">
+				  <thead>
+				    <tr>
+				      <th scope="col">ID</th>
+				      <th scope="col">Chofer</th>
+				      <th scope="col">Precio</th>
+				      <th scope="col">Fecha de Solicitud</th>
+				      <th scope="col">Acciones</th
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	{% if  viajes %}
+				  	{% for viaje in viajes_p %}
+				  	<tr class="table-info">
+				      <th scope="row">{{ viaje.id }}</th>
+				      <td>{{ viaje.chofer.usuario.first_name }}</td>
+				      <td>{{ viaje.precio }}</td>
+				      <td>{{ viaje.fecha_so }}</td>
+				      <td><a href="#" class="btn btn-info">Ver</a></td>
+				    </tr>
+				    {% endfor %}
+				  	{% endif %}
+				  </tbody>
+				</table> 
+			  </div>
+			  <div class="tab-pane fade" id="viaje_r">
+			    <table class="table table-hover">
+				  <thead>
+				    <tr>
+				      <th scope="col">ID</th>
+				      <th scope="col">Chofer</th>
+				      <th scope="col">Precio</th>
+				      <th scope="col">Fecha de Solicitud</th>
+				      <th scope="col">Acciones</th
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	{% if  viajes %}
+				  	{% for viaje in viajes_r %}
+				  	<tr class="table-warning">
+				      <th scope="row">{{ viaje.id }}</th>
+				      <td>{{ viaje.chofer.usuario.first_name }}</td>
+				      <td>{{ viaje.precio }}</td>
+				      <td>{{ viaje.fecha_so }}</td>
+				      <td><a href="#" class="btn btn-info">Ver</a></td>
+				    </tr>
+				    {% endfor %}
+				  	{% endif %}
+				  </tbody>
+				</table> 
+			  </div>
+			  <div class="tab-pane fade" id="viaje_c">
+			    <table class="table table-hover">
+				  <thead>
+				    <tr>
+				      <th scope="col">ID</th>
+				      <th scope="col">Chofer</th>
+				      <th scope="col">Precio</th>
+				      <th scope="col">Fecha de Solicitud</th>
+				      <th scope="col">Acciones</th
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	{% if  viajes %}
+				  	{% for viaje in viajes_c %}
+				  	<tr class="table-danger">
+				      <th scope="row">{{ viaje.id }}</th>
+				      <td>{{ viaje.chofer.usuario.first_name }}</td>
+				      <td>{{ viaje.precio }}</td>
+				      <td>{{ viaje.fecha_so }}</td>
+				      <td><a href="#" class="btn btn-warning">Ver</a></td>
+				    </tr>
+				    {% endfor %}
+				  	{% endif %}
+				  </tbody>
+				</table> 
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+{% endblock content %}

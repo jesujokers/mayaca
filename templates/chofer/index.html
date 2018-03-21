@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% block chofer %}active{% endblock chofer %}
 {% block content %}
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
     		<h1 class="text-center">Pagina principal de chofer</h1>
-			<p>Forma parte de nuestra empresa, solo tienes que registrarte</p>
+			<p>Forma parte de nuestra empresa, comienza con hacer tu preregistro y luego te indicaremos los siguientes pasos</p>
 			<a href="{% url 'chofer:registrar' %}">Registrate</a>
 		</div>
 	</div>

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from apps.cliente.forms import *
 from django.contrib.auth.models import User
 from apps.cliente.models import *
+from apps.servicio.models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.http import HttpResponse,HttpResponseRedirect
@@ -10,7 +11,7 @@ from django.urls import reverse
 
 def index(request):
 	return render(request, 'cliente/index.html')
-
+ 
 def RegistrarCliente(request):
 	if request.method == 'POST':
 		form_cliente = FormCliente(request.POST)
@@ -55,3 +56,33 @@ def EditarCliente(request,id_cliente):
 		'form_cliente': form_cliente,
 		'form_user': form_user
 		})
+
+def ViajesCliente(request, id_cliente):
+	if request.user.is_authenticated:
+		usuario_actual = request.user.id
+		bandera = False
+		bandera2 = False
+
+		cliente = Cliente.objects.filter(usuario_id = usuario_actual)
+		# Verificar que el usuario si existe como cliente...
+		if cliente.exists() == True:
+			bandera = True
+		# Verificar si el usuario actual coincide con la solicitud 
+		if bandera == True:
+			cliente = Cliente.objects.get(usuario_id = usuario_actual)
+			if id_cliente == cliente.id:
+				bandera2 = True
+		# Mostrar los viajes si las dos validaciones anteriores se cumplieron
+		if bandera == True and bandera2 == True:
+			viajes = Viaje.objects.filter(cliente_id = id_cliente)
+			viajes_p = Viaje.objects.filter(cliente_id = id_cliente, estado = 'P')
+			viajes_c = Viaje.objects.filter(cliente_id = id_cliente, estado = 'C')
+			viajes_r = Viaje.objects.filter(cliente_id = id_cliente, estado = 'R')
+			contexto = {
+			'viajes': viajes,
+			'viajes_p': viajes_p,
+			'viajes_c': viajes_c,
+			'viajes_r': viajes_r,
+			}
+			return render(request, 'cliente/servicio.html', contexto)
+	return HttpResponseRedirect(reverse('home:index'))

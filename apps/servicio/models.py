@@ -1,6 +1,7 @@
 from django.db import models
 from apps.cliente.models import Cliente 
 from apps.chofer.models import Chofer 
+from datetime import datetime 
 
 
 # Create your models here.
@@ -14,8 +15,8 @@ class Distancia(models.Model):
 class Viaje(models.Model):
 	cliente = models.ForeignKey(Cliente, on_delete = models.CASCADE)
 	chofer = models.ForeignKey(Chofer, on_delete = models.CASCADE)
-	fecha_so = models.DateField()
-	fecha_re = models.DateField()
+	fecha_so = models.DateTimeField(auto_now_add=True, blank=True)
+	fecha_re = models.DateTimeField()
 	origen_destino = models.ForeignKey(Distancia, on_delete = models.CASCADE)
 	precio = models.FloatField()
-	estado = models.BooleanField()
+	estado = models.CharField(max_length = 1)
