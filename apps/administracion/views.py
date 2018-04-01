@@ -84,6 +84,8 @@ def RegistrarEmpleado(request):
 				descripcion = "Registro"
 				)
 			bitacora.save()
+			if request.user.is_authenticated:
+				return HttpResponseRedirect(reverse('administracion:listar'))
 			login(request, user)
 			return HttpResponseRedirect(reverse('home:index'))
 	else:
@@ -96,6 +98,24 @@ def RegistrarEmpleado(request):
        	'permisos_form': permisos_form
        	})
 
+def EditarEmpleado(request,id_empleado):
+	empleado = User.objects.get(id = id_empleado)
+	if request.method == 'GET':
+		empleado_form = FormEmpleado(instance = empleado.empleado)
+		user_form = FormUser(instance = empleado)
+	else:
+		empleado_form = FormEmpleado(request.POST, instance = empleado.empleado)
+		user_form = FormUser(request.POST, instance = empleado)
+		if empleado_form.is_valid() and user_form.is_valid():
+			usuario = user_form.save()
+			empleado_form.save()
+			login(request, usuario)
+			return HttpResponseRedirect(reverse('home:index'))
+	return render(request, 'administracion/registro.html',{
+		'empleado_form': empleado_form,
+		'user_form': user_form
+		})
+
 
 def ListarEmpleado(request):
 	empleados = Empleado.objects.all()
@@ -103,21 +123,13 @@ def ListarEmpleado(request):
 	return render(request, 'administracion/lista.html', contexto)
 
 def PerfilEmpleado(request, id_usuario):
+	# usuario = User.objects.filter(id = id_usuario)
+	# if usuario.exists():
 	usuario = User.objects.get(id = id_usuario)
+	# 	if usuario.id == request.user.id:
 	return render(request, 'administracion/perfil.html', {'usuario':usuario})
-
-def GestionViajes(request):
-	viajes = Viaje.objects.all()
-	viajes_p = Viaje.objects.filter(estado = 'P')
-	viajes_c = Viaje.objects.filter( estado = 'C')
-	viajes_r = Viaje.objects.filter( estado = 'R')
-	contexto = {
-	'viajes': viajes,
-	'viajes_p': viajes_p,
-	'viajes_c': viajes_c,
-	'viajes_r': viajes_r,
-	}
-	return render(request, 'administracion/viajes.html', contexto)
+	# return HttpResponseRedirect(reverse('home:index'))
 
 def Panel(request):
 	return render(request, 'administracion/panel.html')
+

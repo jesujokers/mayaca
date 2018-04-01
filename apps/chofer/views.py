@@ -56,3 +56,16 @@ def EditarChofer(request, id_chofer):
 def PerfilChofer(request, id_chofer):
 	chofer = User.objects.get(id = id_chofer)
 	return render(request, 'chofer/perfil.html', {'chofer': chofer})
+
+def ListarChofer(request):
+	choferes = Chofer.objects.all()
+	return render(request, 'chofer/lista.html', {'choferes':choferes})
+
+def Trabajar(request,id_chofer):
+	chofer = Chofer.objects.get(id = id_chofer)
+	if chofer.trabajando == True:
+		chofer.trabajando = False
+	else:
+		chofer.trabajando = True
+	chofer.save()
+	return HttpResponseRedirect(reverse('chofer:perfil id_chofer'))

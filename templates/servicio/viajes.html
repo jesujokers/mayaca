@@ -32,9 +32,10 @@
 			</ul>
 			<div id="myTabContent" class="tab-content">
 			  <div class="tab-pane fade  active show" id="viaje_p">
-			  	<a href="#" style="margin: 4px 10px" class="btn btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar un nuevo viaje</a>
+			  	<a href="{% url 'servicio:pedir' %}" style="margin: 4px 10px" class="btn btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar un nuevo viaje</a>
 			  	<a href="#" style="margin: 4px 10px" class="btn btn-warning"><i class="fa fa-thumb-tack" aria-hidden="true"></i> Otra acción aqui (no se que colocar)</a>
 			  	<a href="#" style="margin: 4px 10px" class="btn btn-danger"><i class="fa fa-thumb-tack" aria-hidden="true"></i> <----------- RT</a>
+				  	{% if  viajes_p %}
 			    <table class="table table-hover">
 				  <thead>
 				    <tr>
@@ -47,21 +48,23 @@
 				    </tr>
 				  </thead>
 				  <tbody>
-				  	{% if  viajes_p %}
 				  	{% for viaje in viajes_p %}
-				  	<tr class="table-info">
+				  	<tr class="table-default">
 				      <th scope="row">{{ viaje.id }}</th>
 				      <td>{{ viaje.chofer.usuario.first_name }}</td>
 				      <td>{{ viaje.cliente.usuario.first_name }}</td>
 				      <td>{{ viaje.precio }}</td>
 				      <td>{{ viaje.fecha_so }}</td>
 				      <td>
-				      	<a href="#" class="btn btn-primary" title="Ver"><i class="fa fa-info" aria-hidden="true"></i></a>
-				      	<a href="#" class="btn btn-danger" title="Cancelar"><i class="fa fa-times" aria-hidden="true" title="Cancelar"></i></a>
-						<a href="#" class="btn btn-success" title="Despachar"><i class="fa fa-check" aria-hidden="true"></i></a>
+				      	<a href="{% url 'servicio:detalles' viaje.id %}" class="btn btn-primary" title="Ver Viaje"><i class="fa fa-info" aria-hidden="true"></i></a>
+				      	<a href="{% url 'servicio:cancelar' viaje.id %}" class="btn btn-danger" title="Cancelar"><i class="fa fa-times" aria-hidden="true" title="Cancelar Viaje"></i></a>
+						<a href="{% url 'servicio:despachar' viaje.id %}" class="btn btn-success" title="Despachar Viaje"><i class="fa fa-check" aria-hidden="true"></i></a>
+						<a href="#" class="btn btn-warning" title="Editar"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 				      </td>
 				    </tr>
 				    {% endfor %}
+				    {% else %}
+				    <h3 class="text-center text-primary">No hay viajes disponibles</h3>
 				  	{% endif %}
 				  </tbody>
 				</table> 

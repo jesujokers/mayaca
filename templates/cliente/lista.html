@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+    	<div class="row">
+    		<div class="col-md-12">
+    			<table class="table table-hover">
+				  <thead>
+				    <tr>
+				      <th scope="col">#</th>
+				      <th scope="col">Nombre</th>
+				      <th scope="col">Correo</th>
+				      <th scope="col">Telefono</th>
+				      <th scope="col">Acciones</th>
+
+				    </tr>
+				  </thead>
+				  	{% if clientes %}
+				  	    {% for cliente in clientes %}
+						  <tbody>
+						    <tr class="table-default">
+						      <th scope="row">{{ cliente.id }}</th>
+						      <td>{{ cliente.usuario.first_name }} {{ cliente.usuario.last_name }}</td>
+						      <td>{{ cliente.usuario.email }}</td>
+						      <td>{{ cliente.telefono }}</td>
+						      <td>
+						      	<a href="{% url 'cliente:perfil' cliente.id %}" class="btn btn-outline-primary" title="Ver Perfil"><i class="fa fa-info" aria-hidden="true"></i></a>
+						      </td>
+						    </tr>
+						   </tbody>
+				  		{% endfor %}
+				  	{% endif %}
+				</table>
+    		</div>
+    	</div>
+    </div>
+{% endblock content %}

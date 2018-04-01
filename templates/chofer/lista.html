@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			 <table class="table table-hover">
+		        <thead>
+		          <tr>
+		            <th scope="col">#</th>
+		            <th scope="col">Usuario</th>
+		            <th scope="col">Nombre</th>
+		            <th scope="col">Correo Electrónico</th>
+		            <th scope="col">Telefono</th>
+		            <th class="text-center">Acciones</th>
+		          </tr>
+		        </thead>
+		        <tbody>
+		        	{% if choferes %}
+		        	    {% for chofer in choferes%}
+		      		    <tr>
+		      		      <th scope="row"></th>
+		      		      <td>{{ chofer.id }}</td>
+		      		      <td>{{ chofer.usuario.first_name }}</td>
+		      		      <td>{{ chofer.usuario.email }}</td>
+		      		      <td>{{ chofer.telefono }}</td>
+		      		      <td>
+		      		      <a href="/administracion/eliminar/1/" class="btn btn-danger" title="Eliminar"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+		                  <a href="/administracion/habilitar/1" class="btn btn-success" title="Habilitar"><i class="fa fa-unlock" aria-hidden="true"></i></a>
+		                  <a href="/administracion/editar/1/" class="btn btn-primary" title="Editar"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+		                  <a href="{% url 'chofer:perfil' chofer.usuario.id %}" class="btn btn-info" title="Perfil">Perfil</i></a>
+		      		      </td>
+		      		    </tr>
+		        		{% endfor %}
+		        	{% endif %}
+		        </tbody>
+		      </table> 
+		</div>
+	</div>
+</div>
+{% endblock content %}

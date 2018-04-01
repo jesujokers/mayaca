@@ -9,4 +9,5 @@ urlpatterns = [
 	path('perfil/<int:id_cliente>/', PerfilCliente, name = 'perfil'),
 	path('editar/<int:id_cliente>/', EditarCliente, name = 'editar'),
 	path('viajes/<int:id_cliente>/', ViajesCliente, name = 'viajes'),
+	path('listar/', ListarClientes, name = 'listar'),
 ]

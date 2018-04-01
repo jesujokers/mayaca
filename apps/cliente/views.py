@@ -9,6 +9,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse
 # Create your views here.
 
+
 def index(request):
 	return render(request, 'cliente/index.html')
  
@@ -36,7 +37,7 @@ def RegistrarCliente(request):
 		})
 	
 def PerfilCliente(request,id_cliente):
-	cliente = User.objects.get(id = id_cliente)
+	cliente = Cliente.objects.get(id = id_cliente)
 	return render(request, 'cliente/perfil.html', {'cliente':cliente})
 
 def EditarCliente(request,id_cliente):
@@ -86,3 +87,7 @@ def ViajesCliente(request, id_cliente):
 			}
 			return render(request, 'cliente/servicio.html', contexto)
 	return HttpResponseRedirect(reverse('home:index'))
+
+def ListarClientes(request):
+	clientes = Cliente.objects.all()
+	return render(request, 'cliente/lista.html', {'clientes':clientes})

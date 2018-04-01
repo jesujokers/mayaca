@@ -9,7 +9,9 @@
     			<p>Origen: {{ distancia.origen }}</p>
     			<p>Destino: {{ distancia.destino }}</p>
     			<p>Precio: Bs. {{ viaje.precio }} </p>
-    			<p>Nombre del Chofer: Guillermo</p>
+    			<p>Nombre del Chofer: {{ viaje.chofer.usuario.first_name }} {{ viaje.chofer.usuario.last_name }}</p>
+                <a href="{% url 'servicio:detalles' viaje.id %}">Ver detalles</a>
+                <a href="{% url 'home:index' %}">Pagina de inicio</a>
     		</div>
     	</div>
     </div>

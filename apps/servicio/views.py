@@ -9,6 +9,7 @@ from datetime import date, datetime
 
 # Create your views here.
 
+
 def index(request):
 	return render(request, 'servicio/index.html')
 
@@ -58,3 +59,35 @@ def RegistrarViaje(request):
 		viaje.save()
 		return render(request, 'servicio/pedido.html', {'viaje': viaje, 'distancia': distancia})
 	return HttpResponseRedirect(reverse('home:index'))
+
+def DetallesViaje(request,id_viaje):
+	viaje = Viaje.objects.filter(id = id_viaje)
+	if viaje.exists() == True:
+		viaje = Viaje.objects.get(id = id_viaje)
+		return render(request, 'servicio/viaje.html', {'viaje':viaje})
+	return render(request, 'servicio/viaje.html')
+
+def GestionViajes(request):
+	viajes = Viaje.objects.all()
+	viajes_p = Viaje.objects.filter(estado = 'P')
+	viajes_c = Viaje.objects.filter( estado = 'C')
+	viajes_r = Viaje.objects.filter( estado = 'R')
+	contexto = {
+	'viajes': viajes,
+	'viajes_p': viajes_p,
+	'viajes_c': viajes_c,
+	'viajes_r': viajes_r,
+	}
+	return render(request, 'servicio/viajes.html', contexto)
+
+def CancelarViaje(request,id_viaje):
+	viaje = Viaje.objects.get(id = id_viaje)
+	viaje.estado = 'C'
+	viaje.save()
+	return HttpResponseRedirect(reverse('servicio:gestion'))
+
+def DespacharViaje(request,id_viaje):
+	viaje = Viaje.objects.get(id = id_viaje)
+	viaje.estado = 'R'
+	viaje.save()
+	return HttpResponseRedirect(reverse('servicio:gestion'))
