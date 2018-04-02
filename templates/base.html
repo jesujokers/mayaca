@@ -64,38 +64,38 @@
 			    	    {% endif %}
 			    </a>
 			    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;">
-			      <a class="dropdown-item" href="#">Configuracion <i class="fa fa-wrench" aria-hidden="true"></i></a>
+			      <a class="dropdown-item" href="#"><i class="fa fa-wrench" aria-hidden="true"></i> Configuracion </a>
 			    	 <!-- ================== Modificar Perfil ===============  -->
 			      {% if user.cliente %}
-			      <a class="dropdown-item" href="{% url 'cliente:editar' user.id %}">Modificar perfil  <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+			      <a class="dropdown-item" href="{% url 'cliente:editar' user.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modificar perfil  </a>
 			      {% elif user.chofer %}
-			      <a class="dropdown-item" href="{% url 'chofer:editar' user.id %}">Modificar perfil  <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+			      <a class="dropdown-item" href="{% url 'chofer:editar' user.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modificar perfil  </a>
 			      {% endif %}
 			      <!-- ================== Administrar ====================  -->
 				  {% if user.empleado %}
-			      <a class="dropdown-item" href="{% url 'administracion:panel' %}">Administrar <i class="fa fa-binoculars" aria-hidden="true"></i></a>
+			      <a class="dropdown-item" href="{% url 'administracion:panel' %}"> <i class="fa fa-binoculars" aria-hidden="true"></i> Administrar </a>
 				  {% endif %}
 				  <!-- ====================== -->
 				  {% if user.cliente %}
-				  <a class="dropdown-item" href="{% url 'cliente:viajes' user.cliente.id %}">Viajes <i class="fa fa-binoculars" aria-hidden="true"></i></a>    
+				  <a class="dropdown-item" href="{% url 'cliente:viajes' user.cliente.id %}"><i class="fa fa-binoculars" aria-hidden="true"></i> Viajes</a>    
 				  {% endif %}
 				  <!-- ====================== -->
 
 				  <!-- =============== Perfil ===================== -->
 				  {% if user.cliente %}
-			      <a class="dropdown-item" href="{% url 'cliente:perfil' user.cliente.id %}">Perfil <i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+			      <a class="dropdown-item" href="{% url 'cliente:perfil' user.cliente.id %}"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Perfil </a>
 				  {% elif user.chofer %}
-				  <a class="dropdown-item" href="{% url 'chofer:perfil' user.id %}">Perfil <i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+				  <a class="dropdown-item" href="{% url 'chofer:perfil' user.id %}"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Perfil </a>
 				  {% elif user.empleado or user %}
-			      <a class="dropdown-item" href="{% url 'administracion:perfil' user.id %}">Perfil <i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+			      <a class="dropdown-item" href="{% url 'administracion:perfil' user.id %}"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Perfil </a>
 				  {% endif %}
 				  <!-- ====================== Log Out ====================== -->
 			      <div class="dropdown-divider"></div>
-			      <a class="dropdown-item" href="{% url 'logout' %}">Salir <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+			      <a class="dropdown-item" href="{% url 'logout' %}"> <i class="fa fa-sign-out" aria-hidden="true"></i> Salir</a>
 			    </div>
 			  </li>
 			  <li class="nav-item">
-		        <a class="nav-link" href="{% url 'logout' %}">Salir <i class="fa fa-sign-out" aria-hidden="true"></i>
+		        <a class="nav-link" href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i> Salir 
 </a>
 			 </li>
 			</ul>
