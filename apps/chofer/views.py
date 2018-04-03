@@ -13,7 +13,7 @@ def index(request):
 def RegistrarChofer(request):
 	if request.method == 'POST':
 		user_form = FormUser(request.POST)
-		chofer_form = FormChofer(request.POST)
+		chofer_form = FormChofer(request.POST, request.FILES)
 		if user_form.is_valid() and chofer_form.is_valid():
 			usuario = user_form.save()
 			usuario.refresh_from_db()
@@ -21,7 +21,8 @@ def RegistrarChofer(request):
 				usuario = usuario,
 				cedula = chofer_form.cleaned_data['cedula'],
 				telefono = chofer_form.cleaned_data['telefono'],
-				trabajando = True
+				trabajando = True,
+				foto = request.FILES['foto']
 				)
 			chofer.save()
 			login(request, usuario)
