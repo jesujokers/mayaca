@@ -7,7 +7,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
+      {% if user.empleado.permisos.registrar == True %}
       <a href="{% url 'administracion:registrar' %}" class="btn btn-primary">Agregar Nuevo Empleado</a>
+      {% endif %}
       <a href="#" class="btn btn-info">Otra opcion Aqui</a>
     </div>
   </div>
@@ -35,18 +37,26 @@
       		      <td>{{ empleado.usuario.email }}</td>
       		      <td>{{ empleado.rol }}</td>
       		      <td>
-      		      	<a href="{% url 'administracion:eliminar' empleado.id %}" class="btn btn-danger" title="Eliminar"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                  {% if empleado.usuario.id == user.id %}
+                  {% else %}
+                    {% if user.empleado.permisos.eliminar == True %}
+                  <a href="{% url 'administracion:eliminar' empleado.id %}" class="btn btn-danger" title="Eliminar"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    {% endif %}
+                    {% if user.empleado.permisos.suspender == True %}
                   {% if empleado.is_active == 1 %}
-      		      	<a href="{% url 'administracion:suspender' empleado.id %}" class="btn btn-warning" title="Suspender"><i class="fa fa-lock" aria-hidden="true"></i></a>
+                  <a href="{% url 'administracion:suspender' empleado.id %}" class="btn btn-warning" title="Suspender"><i class="fa fa-lock" aria-hidden="true"></i></a>
                   {% else %}
                   <a href="{% url 'administracion:habilitar' empleado.id %}" class="btn btn-success" title="Habilitar"><i class="fa fa-unlock" aria-hidden="true"></i></a>
                   {% endif %}
+                    {% endif %}
+                    {% if user.empleado.permisos.editar == True %}
                   <a href="{% url 'administracion:editar' empleado.id %}" class="btn btn-primary" title="Editar"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    {% endif %}
+                  {% endif %}
                   <a href="{% url 'administracion:perfil' empleado.usuario_id %}" class="btn btn-info" title="Perfil">Perfil</i></a>
-
-      		      </td>
-      		    </tr>
-          	{% endfor %}
+                </td>
+              </tr>
+            {% endfor %}
           {% else %}
           <h2>No hay Registros Disponibles</h2>
           {% endif %}

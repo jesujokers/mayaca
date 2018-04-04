@@ -11,4 +11,4 @@ class Chofer(models.Model):
 	trabajando = models.BooleanField()
 
 	def __str__(self):
-		return self.usuario.first_name
+		return self.usuario.first_name + ' ' + self.usuario.last_name

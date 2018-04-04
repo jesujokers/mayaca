@@ -14,12 +14,12 @@
 			  <div class="card-body">
 			    <h6 class="card-subtitle text-muted">Fecha de Inscripción: {{ chofer.date_joined }}</h6>
 			  </div>
-			  <img style="height: 90%; width: 60%; display: block; margin-left: auto; margin-right: auto" src="{{ chofer.chofer.foto.url }}" alt="Card image">
+			  <img style="height: 90%; width: 60%; display: block; margin-left: auto; margin-right: auto; border-radius: 30px;" src="/static/media/{{ chofer.chofer.foto }}" alt="Card image">
 			  <div class="card-body">
 			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 			  </div>
 			  <ul class="list-group list-group-flush">
-			    <li class="list-group-item"><strong></strong> V-{{ chofer.chofer.cedula }}</li>
+			    <li class="list-group-item"><strong>Cedula</strong> V-{{ chofer.chofer.cedula }}</li>
 			    <li class="list-group-item"><strong>Nombre:</strong> {{ chofer.first_name }} {{ chofer.last_name }}</li>
 			    <li class="list-group-item"><strong>Email:</strong> {{ chofer.email }}</li>
 			    <li class="list-group-item"><strong>Telefono:</strong> {{ chofer.chofer.telefono }}</li>
@@ -34,7 +34,7 @@
 			    {% endif %}
 			  </ul>
 			  <div class="card-body">
-			    <a href="{% url 'cliente:editar' user.id %}" class="card-link btn btn-primary">Modificar Perfil</a>
+			    <a href="{% url 'chofer:editar' user.id %}" class="card-link btn btn-primary">Modificar Perfil</a>
 			    <a href="{% url 'home:index' %}" class="card-link">Volver</a>
 			  </div>
 			  <div class="card-footer text-muted">

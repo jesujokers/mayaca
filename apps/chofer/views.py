@@ -41,7 +41,7 @@ def EditarChofer(request, id_chofer):
 		chofer_form = FormChofer(instance = chofer.chofer)
 		user_form = FormUser(instance = chofer)
 	else:
-		chofer_form = FormChofer(request.POST, instance = chofer)
+		chofer_form = FormChofer(request.POST, request.FILES, instance = chofer)
 		user_form = FormUser(request.POST, instance = chofer)
 		if chofer_form.is_valid() and user_form.is_valid():
 			usuario = user_form.save()

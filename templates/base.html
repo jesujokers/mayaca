@@ -74,6 +74,8 @@
 			      <!-- ================== Administrar ====================  -->
 				  {% if user.empleado %}
 			      <a class="dropdown-item" href="{% url 'administracion:panel' %}"> <i class="fa fa-binoculars" aria-hidden="true"></i> Administrar </a>
+			      {% elif user.chofer %}
+			      <a class="dropdown-item" href="{% url 'administracion:panel' %}"> <i class="fa fa-binoculars" aria-hidden="true"></i> Mis Viajes </a>
 				  {% endif %}
 				  <!-- ====================== -->
 				  {% if user.cliente %}

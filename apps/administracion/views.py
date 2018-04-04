@@ -68,6 +68,12 @@ def RegistrarEmpleado(request):
 			user = user_form.save()
 			user.refresh_from_db()
 			permisos = permisos_form.save()
+
+			if permisos.agregar == False or permisos.eliminar == False or permisos.editar == False or permisos.actualizar == False or permisos.suspender == False or permisos.habilitar == False:
+				rol = 'Empleado'
+			else:
+				rol = 'Administrador'
+
 			empleado = Empleado(
 				usuario = user, 
 				cedula = empleado_form.cleaned_data['cedula'],
@@ -75,7 +81,7 @@ def RegistrarEmpleado(request):
 				fecha_nacimiento = empleado_form.cleaned_data['fecha_nacimiento'],
 				direccion = empleado_form.cleaned_data['direccion'],
 				telefono = empleado_form.cleaned_data['telefono'],
-				rol = empleado_form.cleaned_data['rol'],
+				rol = rol,
 				permisos = permisos
 				)
 			empleado.save()
@@ -123,12 +129,8 @@ def ListarEmpleado(request):
 	return render(request, 'administracion/lista.html', contexto)
 
 def PerfilEmpleado(request, id_usuario):
-	# usuario = User.objects.filter(id = id_usuario)
-	# if usuario.exists():
 	usuario = User.objects.get(id = id_usuario)
-	# 	if usuario.id == request.user.id:
 	return render(request, 'administracion/perfil.html', {'usuario':usuario})
-	# return HttpResponseRedirect(reverse('home:index'))
 
 def Panel(request):
 	return render(request, 'administracion/panel.html')
