@@ -9,7 +9,9 @@
 					{% csrf_token %}
 					
 					{{ user_form.as_p }}
-					{{ permisos_form.as_p }}
+					{% if user.empleado.permisos.editar == True %}
+						{{ permisos_form.as_p }}
+					{% endif %}
 					{{ empleado_form.as_p }}
   					
 

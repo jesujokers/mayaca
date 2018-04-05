@@ -25,6 +25,8 @@ def RegistrarChofer(request):
 				foto = request.FILES['foto']
 				)
 			chofer.save()
+			usuario.is_active = 0
+			usuario.save()
 			login(request, usuario)
 			return HttpResponseRedirect(reverse('home:index'))
 	else:

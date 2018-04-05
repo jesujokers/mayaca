@@ -30,7 +30,7 @@ class Empleado(models.Model):
 		return self.usuario.username
 
 class BitacoraEmpleado(models.Model):
-	user = models.ForeignKey(Empleado, on_delete = 'cascade', default = None)
+	user = models.ForeignKey(User, on_delete = 'cascade', default = None)
 	descripcion = models.CharField(max_length = 12)
 	fecha = models.DateField(default=datetime.today)
 

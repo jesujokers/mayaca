@@ -32,8 +32,7 @@ class FormEmpleado(forms.ModelForm):
 			'sueldo',
 			'fecha_nacimiento',
 			'direccion',
-			'telefono',
-			'rol'
+			'telefono'
 			)
 class FormPermisos(forms.ModelForm):
 	class Meta:

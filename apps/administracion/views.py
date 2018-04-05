@@ -86,7 +86,7 @@ def RegistrarEmpleado(request):
 				)
 			empleado.save()
 			bitacora = BitacoraEmpleado(
-				user = empleado,
+				user = request.user,
 				descripcion = "Registro"
 				)
 			bitacora.save()
@@ -105,21 +105,30 @@ def RegistrarEmpleado(request):
        	})
 
 def EditarEmpleado(request,id_empleado):
+	editar = True
 	empleado = User.objects.get(id = id_empleado)
 	if request.method == 'GET':
 		empleado_form = FormEmpleado(instance = empleado.empleado)
 		user_form = FormUser(instance = empleado)
+		permisos_form = FormPermisos(instance = empleado.empleado.permisos)
 	else:
 		empleado_form = FormEmpleado(request.POST, instance = empleado.empleado)
 		user_form = FormUser(request.POST, instance = empleado)
 		if empleado_form.is_valid() and user_form.is_valid():
 			usuario = user_form.save()
 			empleado_form.save()
+			bitacora = BitacoraEmpleado(
+				user = request.user,
+				descripcion = "Edicion"
+				)
+			bitacora.save()
 			login(request, usuario)
 			return HttpResponseRedirect(reverse('home:index'))
 	return render(request, 'administracion/registro.html',{
 		'empleado_form': empleado_form,
-		'user_form': user_form
+		'user_form': user_form,
+		'permisos_form': permisos_form,
+		'editar': editar
 		})
 
 
