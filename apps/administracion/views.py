@@ -8,7 +8,8 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy,reverse
 from apps.servicio.models import *
-
+from apps.chofer.models import *
+from mayaca.settings import Precio
 # from django.urls import reverse
 # from django.utils.functional import lazy
 # reverse_lazy = lambda *args, **kwargs: lazy(reverse, str)(*args, **kwargs) 
@@ -142,5 +143,15 @@ def PerfilEmpleado(request, id_usuario):
 	return render(request, 'administracion/perfil.html', {'usuario':usuario})
 
 def Panel(request):
+	bandera_chofer = False
+	choferes = Chofer.objects.all()
+	for chofer in choferes:
+		if chofer.usuario.is_active == False:
+			bandera_chofer = True
+	if bandera_chofer == True:
+		return render(request, 'administracion/panel.html',{'bandera_chofer':bandera_chofer})	
 	return render(request, 'administracion/panel.html')
 
+def CambiarPrecio(request,precio_nuevo):
+	Precio = precio_nuevo
+	return HttpResponseRedirect(reverse('home:index'))

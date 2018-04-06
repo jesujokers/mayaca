@@ -1,10 +1,11 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
 {% block content %}
     <div class="container">
     	<div class="row">
     		<div class="col-md-12">
-    			<h2>¡Taxi pedido!</h2>
+    			<h2>¡Taxi pedido!</h2><img width="300px" src="{% static 'img/check.png' %}" alt="">
     			<p>Número de solicitud: #{{ viaje.id }}</p>
     			<p>Origen: {{ distancia.origen }}</p>
     			<p>Destino: {{ distancia.destino }}</p>

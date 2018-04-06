@@ -87,7 +87,7 @@
 				  {% if user.cliente %}
 			      <a class="dropdown-item" href="{% url 'cliente:perfil' user.cliente.id %}"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Perfil </a>
 				  {% elif user.chofer %}
-				  <a class="dropdown-item" href="{% url 'chofer:perfil' user.id %}"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Perfil </a>
+				  <a class="dropdown-item" href="{% url 'chofer:perfil' user.chofer.id %}"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Perfil </a>
 				  {% elif user.empleado or user %}
 			      <a class="dropdown-item" href="{% url 'administracion:perfil' user.id %}"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Perfil </a>
 				  {% endif %}

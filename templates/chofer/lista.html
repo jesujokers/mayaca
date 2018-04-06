@@ -27,7 +27,7 @@
 		      		      <a href="/administracion/eliminar/1/" class="btn btn-danger" title="Eliminar"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 		                  <a href="/administracion/habilitar/1" class="btn btn-success" title="Habilitar"><i class="fa fa-unlock" aria-hidden="true"></i></a>
 		                  <a href="/administracion/editar/1/" class="btn btn-primary" title="Editar"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-		                  <a href="{% url 'chofer:perfil' chofer.usuario.id %}" class="btn btn-info" title="Perfil">Perfil</i></a>
+		                  <a href="{% url 'chofer:perfil' chofer.id %}" class="btn btn-info" title="Perfil">Perfil</i></a>
 		      		      </td>
 		      		    </tr>
 		        		{% endfor %}

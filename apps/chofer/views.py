@@ -10,6 +10,7 @@ from django.contrib.auth import login
 def index(request):
 	return render(request, 'chofer/index.html')
 
+
 def RegistrarChofer(request):
 	if request.method == 'POST':
 		user_form = FormUser(request.POST)
@@ -57,8 +58,11 @@ def EditarChofer(request, id_chofer):
 
 
 def PerfilChofer(request, id_chofer):
-	chofer = User.objects.get(id = id_chofer)
-	return render(request, 'chofer/perfil.html', {'chofer': chofer})
+	chofer = Chofer.objects.filter(id = id_chofer).exists()
+	if chofer == True:
+		chofer = Chofer.objects.get(id = id_chofer)
+		return render(request, 'chofer/perfil.html', {'chofer': chofer})
+	return render(request, 'chofer/perfil.html')
 
 def ListarChofer(request):
 	choferes = Chofer.objects.all()
