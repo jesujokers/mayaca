@@ -5,8 +5,8 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-6 wrap">
-			<h2>Para confirmar el viaje complete el formulario: </h2>
+		<div class="col-md-12 wrap">
+			<h2 class="text-center text-primary">Para confirmar el viaje complete el formulario: </h2>
 			{% if origen %}
 				<form action="{% url 'servicio:pedido' %}" class="form-group" method="post">
 					{% csrf_token %}
@@ -21,9 +21,9 @@
 						{% else %}
 						<h4 class="text-center">Elija un cliente</h4>
 						    {% if clientes %}
-						    		<select name="cliente" id="cliente" class="form-control">
+						    		<select name="cliente" id="cliente" class="form-control" style="margin-left: auto; margin-right: auto; width: 50%;">
 						    			{% for cliente in clientes %}
-						    				<option value="{{ cliente.cedula }}">{{ cliente.usuario.first_name }} {{ cliente.usuario.last_name }} - v-{{ cliente.cedula }}</option>
+						    				<option value="{{ cliente.cedula }}">{{ cliente.usuario.first_name }} {{ cliente.usuario.last_name }} - V-{{ cliente.cedula }}</option>
 						    			{% endfor %}
 						    		</select>				    						
 						    {% endif %}						
@@ -35,27 +35,34 @@
 					</div>
 					<div class="form-group radio">
 					
-						<h3>Indique la fecha:</h3>
-						<p>
-							Si elijes reservar el precio puede estar sujeto a cambios de acuerdo a la tasa actual del dia que se le preste el servicio, para mas informacion lea nuestro 
-							<a href="#">Terminos y condiciones del servicio</a>
-						</p>
+						<h3 class="text-center">Indique la fecha:</h3>
+						<div class="alert alert-dismissible alert-info">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<p class="text-center">
+								Si elijes reservar el precio puede estar sujeto a cambios de acuerdo a la tasa actual del dia que se le preste el servicio, para mas informacion lea nuestro 
+								<a href="#">Terminos y condiciones del servicio</a>
+							</p>
+						</div>
+
+						<label for="ahora" class="custom-control-label">Ahora</label>
+						<input type="radio" value="ahora" name="fecha" id="ahora" class="custom-control-input">
+
+						<label for="reservar" class="custom-control-label">Reservar</label>
+						<input type="radio" value="reservar" name="fecha" id="reservar"  class="custom-control-input">
+
 					
-						<label for="ahora">Ahora</label>
-						<input type="radio" value="ahora" name="fecha" id="ahora">
-					
-						<label for="reservar">Reservar</label>
-						<input type="radio" value="reservar" name="fecha" id="reservar">
-					
+
 					</div>
-						<div class="form-group">
-							<input type="date" class="form-control" min="2018-03-03" id="fecha_re" name="fecha_re" readonly="readonly">
-							<button type="submit" class="btn btn-primary">Confirmar y pedir</button>
+						<div class="form-group" style="margin: 10px auto">
+							<input type="date" class="form-control " min="2018-03-03" id="fecha_re" name="fecha_re" readonly="readonly" style="margin: 10px; margin-right: auto; margin-left: auto; width: 50%" >
+							<span class="text-center">
+								<button type="submit" class="btn btn-primary">Confirmar y pedir</button>
+								<a href="{% url 'servicio:pedir' %}" class="btn btn-default">Cancelar</a>
+							</span>
 						</div>
 				</form>
 			{% endif %}
 			
-			<a href="{% url 'servicio:pedir' %}" class="btn btn-default">Cancelar</a>
 		</div>
 	</div>
 </div>
