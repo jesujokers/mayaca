@@ -8,102 +8,56 @@
 			<img style="height: 80%; width: 100%; display: block; margin-left: auto; margin-right: auto; border-radius: 10px; margin-bottom: 10px;" src="/static/media/{{ chofer.foto }}" alt="Card image" class="img-responsive">
 			<h4>{{ chofer.usuario.first_name }} {{ chofer.usuario.last_name }}</h4>
 			<h4 class="text-muted">{{chofer.usuario.username}}</h4>
-			<hr>
 		</div>
 		<div class="col-md-9">
 			<h3 class="text-center">Resumen de viajes</h3>
 			<hr>
 			<div class="row">
-				<div class="col-md-6">
-					<h4>Item #1</h4>
-					<p>Lorem ipsum dolor sit amet.</p>
+				<div class="col-md-6 form-control">
+					<h4>Viajes Totales</h4>
+					<h2 class="text-center text-primary">15</h2>
 				</div>
-				<div class="col-md-6">
-					<h4>Item #1</h4>
-					<p>Lorem ipsum dolor sit amet.</p>
+				<div class="col-md-6 form-control">
+					<h4>Viajes Cancelados</h4>
+					<h2 class="text-center text-danger">7</h2>
 				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-
-	<div class="row">
-		<div class="col-md-12" style="margin: 20px 0px;">
-			<h2 class="text-center text-primary">Perfil del Chofer</h2>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-8">
-			<div class="card mb-3">
-			  <h3 class="card-header">{{ chofer.usuario.first_name }} {{ chofer.usuario.last_name }}</h3>
-			  <div class="card-body">
-			    <h6 class="card-subtitle text-muted">Fecha de Inscripción: {{ chofer.usuario.date_joined }}</h6>
-			  </div>
-			  <img style="height: 70%; width: 60%; display: block; margin-left: auto; margin-right: auto; border-radius: 30px; margin-bottom: 10px;" src="/static/media/{{ chofer.foto }}" alt="Card image">
-			  <div class="card-body">
-			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-			  </div>
-			  <ul class="list-group list-group-flush">
-			    <li class="list-group-item"><strong>Cedula</strong> V-{{ chofer.cedula }}</li>
-			    <li class="list-group-item"><strong>Nombre:</strong> {{ chofer.usuario.first_name }} {{ chofer.usuario.last_name }}</li>
-			    <li class="list-group-item"><strong>Email:</strong> {{ chofer.usuario.email }}</li>
-			    <li class="list-group-item"><strong>Telefono:</strong> {{ chofer.telefono }}</li>
-			    {% if chofer.trabajando == True %}
-			    <li class="list-group-item"><strong>Trabajando:</strong> Si
-					<a href="#" class="btn btn-success" style="margin-left:50%">Cambiar</a>
-			    </li>
-			    {% else %}
-			    <li class="list-group-item"><strong>Trabajando:</strong> No
-					<a href="#" class="btn btn-danger" style="margin-left:50%">Cambiar</a>
-			    </li>
-			    {% endif %}
-			  </ul>
-			  <div class="card-body">
-			    <a href="{% url 'chofer:editar' user.id %}" class="card-link btn btn-primary">Modificar Perfil</a>
-			    <a href="{% url 'home:index' %}" class="card-link">Volver</a>
-			  </div>
-			  <div class="card-footer text-muted">
-			    Ultima Sesión: {{ user.last_login }}
-			  </div>
-			</div>
-
-		</div>
-
-		<div class="col-md-4">
-			<div class="card border-primary mb-3" style="max-width: 20rem;">
-			  <div class="card-header">Gestiones</div>
-			  <div class="card-body">
-			    <h4 class="card-title">Viajes: </h4>
-			    <p>Realizados: 3</p>
-			    <p>Cancelados: 2</p>
-			    <p>Reservados: 3</p>
-			    <p>Cancelados: 7</p>
-			  </div>
-			</div>
-			<div class="card border-info mb-3" style="max-width: 20rem;">
-			  <div class="card-header">Otras Gestiones</div>
-			  <div class="card-body">
-			    <h4 class="card-title">Otros datos</h4>
-			    <p class="card-text">Ultimo cliente: Patricio</p>
-			  </div>
+				<div class="col-md-6 form-control">
+					<h4>Viajes Realizados</h4>
+					<h2 class="text-center text-success">2</h2>
+				</div>
+				<div class="col-md-6 form-control">
+					<h4>Viajes Pendientes</h4>
+					<h2 class="text-center text-warning">6</h2>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-			{% else %}
-				<div class="container">
+<div class="container">
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-9">
+			<hr>
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="text-center text-primary" style="margin-bottom: 20px;">Datos del Chofer</h2>
 					<div class="row">
-						<div class="col-md-12">
-							<br><br>
-							<h2 class="text-center text-primary">Chofer no disponible</h2>
-							<br>
-							<h3 class="text-center text-primary">El chofer al que intentas acceder no esta disponible, o no tienes el acceso permitido, por favor verifica</h3>
-							<br>
-							<h1 class="text-primary text-center" style="font-size: 120px"><i class="fa fa-chain-broken" aria-hidden="true"></i></h1>
+						<div class="col-md-6">
+							<p><strong>Cedula:</strong> V-{{ chofer.cedula }}</p>
+							<p><strong>Nombre:</strong> {{ chofer.usuario.first_name }} {{ chofer.usuario.last_name }}</p>
+							<p><strong>Email:</strong> {{ chofer.usuario.email }}</p>
+						</div>
+						<div class="col-md-6">
+							<p><strong>Telefono:</strong> {{ chofer.telefono }}</p>
+							<p><strong>Trabajando:</strong> Si<a href="#" class="btn btn-danger btn-sm" style="margin-left: 30px">Cambiar</a></p>
+							<p><strong>Fecha de Ingreso:</strong> {{ chofer.usuario.date_joined }}</p>
 						</div>
 					</div>
-				</div>    
-			{% endif %}
+					<p class="text-center">Última Sesión: {{ user.last_login }}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	{% endif %}
 {% endblock content %}

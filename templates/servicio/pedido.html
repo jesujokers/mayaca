@@ -5,14 +5,18 @@
     <div class="container">
     	<div class="row">
     		<div class="col-md-12">
-    			<h2>¡Taxi pedido!</h2><img width="300px" src="{% static 'img/check.png' %}" alt="">
-    			<p>Número de solicitud: #{{ viaje.id }}</p>
-    			<p>Origen: {{ distancia.origen }}</p>
-    			<p>Destino: {{ distancia.destino }}</p>
-    			<p>Precio: Bs. {{ viaje.precio }} </p>
-    			<p>Nombre del Chofer: {{ viaje.chofer.usuario.first_name }} {{ viaje.chofer.usuario.last_name }}</p>
-                <a href="{% url 'servicio:detalles' viaje.id %}">Ver detalles</a>
-                <a href="{% url 'home:index' %}">Pagina de inicio</a>
+    			<h2 class="text-center">¡Taxi pedido!</h2>
+                <!-- <img width="300px" src="{% static 'img/check.png' %}" alt=""> -->
+                <h1 class="text-center text-success"><i class="fa fa-check" aria-hidden="true"></i></h1>
+    			<p class="text-center"><strong>Número de solicitud:</strong> #{{ viaje.id }}</p>
+    			<p><strong>Origen:</strong> {{ distancia.origen }}</p>
+    			<p><strong>Destino: </strong>{{ distancia.destino }}</p>
+    			<p class="text-center"><strong>Precio</strong>: Bs. {{ viaje.precio }} </p>
+    			<p class="text-center"><strong>Nombre del Chofer:</strong> {{ viaje.chofer.usuario.first_name }} {{ viaje.chofer.usuario.last_name }}</p>
+               <div class="botones" style="display: flex; justify-content: end;">
+                    <a href="{% url 'servicio:detalles' viaje.id %}" class="btn btn-primary" style="left: 0">Ver detalles</a>
+                   <a href="{% url 'home:index' %}" class="btn btn-success" style="left: 0">Pagina de inicio</a>
+               </div>
     		</div>
     	</div>
     </div>
