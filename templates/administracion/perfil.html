@@ -42,7 +42,7 @@
 		<div class="col-md-9">
 			<div class="row">
 				<div class="col-md-12">
-					<h2 class="text-center text-primary" style="margin-bottom: 20px;">Datos del Chofer</h2>
+					<h2 class="text-center text-primary" style="margin-bottom: 20px;">Datos del Empleado</h2>
 					<div class="row">
 						<div class="col-md-6">
 							<p><strong>Cedula:</strong> V-{{ empleado.cedula }}</p>
@@ -60,10 +60,12 @@
 							<p><strong>Sueldo:</strong> {{ empleado.sueldo }}</p>
 							<p><strong>Fecha de nacimiento:</strong> {{ empleado.fecha_nacimiento }}</p>
 							<p><strong>Fecha de Ingreso:</strong> {{ empleado.usuario.date_joined }}</p>
+							<a href="{% url 'administracion:editar' empleado.usuario.id %}" class="btn btn-primary" style="right: 0">Editar Perfil</a>
 						</div>
 					</div>
-					<p class="text-center">Última Sesión: {{ empleado.usuario.last_login }}</p>
+					<p class="text-center" style="margin-top: 10px">Última Sesión: {{ empleado.usuario.last_login }}</p>
 				</div>
+
 			</div>
 		</div>
 	</div>
@@ -76,11 +78,9 @@
 			    <h2 class="text-center text-primary">El empleado al que intenta acceder no esta disponible o no tiene los permisos necesarios para acceder</h2>
 			    <h1 class="text-center text-primary" style="font-size: 110px"><i class="fa fa-chain-broken" aria-hidden="true"></i></h1>
 			</div>
-			<div class="col-md-5"></div>
-			<div class="col-md-2">
-			    <a href="{% url 'home:index' %}" class="btn btn-default text-center">Volver a la pagina principal</a>
+			<div class="col-md-12">
+			    <a href="{% url 'home:index' %}" class="btn btn-primary btn-lg" style="display: block">Volver a la pagina principal</a>
 			</div>
-			<div class="col-md-5"></div>
 		</div>
 	</div>
 	{% endif %}

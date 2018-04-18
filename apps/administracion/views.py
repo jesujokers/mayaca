@@ -150,8 +150,10 @@ def PerfilEmpleado(request, id_empleado):
 			usuario_actual = request.user.id 
 			empleado = Empleado.objects.filter(usuario = usuario_actual)
 			if empleado.exists() == True:
-				empleado = Empleado.objects.get(id = id_empleado)
-				return render(request, 'administracion/perfil.html', {'empleado':empleado})
+				empleado = Empleado.objects.filter(id = id_empleado)
+				if empleado.exists == True:
+					empleado = Empleado.objects.get(id = id_empleado)
+					return render(request, 'administracion/perfil.html', {'empleado':empleado})
 	return render(request, 'administracion/perfil.html')
 
 def Panel(request):

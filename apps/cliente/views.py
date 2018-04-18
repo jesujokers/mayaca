@@ -3,6 +3,7 @@ from apps.cliente.forms import *
 from django.contrib.auth.models import User
 from apps.cliente.models import *
 from apps.servicio.models import *
+from apps.administracion.models import Empleado
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.http import HttpResponse,HttpResponseRedirect
@@ -41,22 +42,45 @@ def PerfilCliente(request,id_cliente):
 	return render(request, 'cliente/perfil.html', {'cliente':cliente})
 
 def EditarCliente(request,id_cliente):
-	cliente = User.objects.get(id = id_cliente)
-	if request.method == 'GET':
-		form_cliente = FormCliente(instance = cliente.cliente)
-		form_user = FormUser(instance = cliente)
+	bandera = False
+	bandera2 = False
+	usuario_actual = request.user.id 
+
+	# Comprobacion de si es el cliente actual
+	cliente = Cliente.objects.filter(id = id_cliente)
+	if cliente.exists() == True:
+		cliente = Cliente.objects.filter(usuario = usuario_actual)
+		if cliente.exists() == True:
+			cliente = Cliente.objects.get(usuario = usuario_actual)
+			if id_cliente == cliente.id:
+				bandera = True
+
+	# Comprobacion de si es un empleado 
+	empleado = Empleado.objects.filter(usuario = usuario_actual)
+	if empleado.exists() == True:
+		empleado = Empleado.objects.get(usuario = usuario_actual)
+		if empleado.usuario.id == usuario_actual:
+			bandera2 = True
+
+	if request.user.is_authenticated and (bandera2 == True or bandera == True):
+		cliente = Cliente.objects.get(id = id_cliente)
+		if request.method == 'GET':
+			form_cliente = FormCliente(instance = cliente)
+			form_user = FormUser(instance = cliente.usuario)
+		else:
+			form_cliente = FormCliente(request.POST, instance = cliente)
+			form_user = FormUser(request.POST, instance = cliente)
+			if form_cliente.is_valid() and form_user.is_valid():
+				usuario = form_user.save()
+				form_cliente.save()
+				login(request, usuario)
+				return HttpResponseRedirect(reverse('home:index'))
+		return render(request, 'cliente/registro.html',{
+			'form_cliente': form_cliente,
+			'form_user': form_user
+			})
 	else:
-		form_cliente = FormCliente(request.POST, instance = cliente)
-		form_user = FormUser(request.POST, instance = cliente)
-		if form_cliente.is_valid() and form_user.is_valid():
-			usuario = form_user.save()
-			form_cliente.save()
-			login(request, usuario)
-			return HttpResponseRedirect(reverse('home:index'))
-	return render(request, 'cliente/registro.html',{
-		'form_cliente': form_cliente,
-		'form_user': form_user
-		})
+		return render(request, 'cliente/registro.html')
 
 def ViajesCliente(request, id_cliente):
 	if request.user.is_authenticated:
@@ -89,5 +113,12 @@ def ViajesCliente(request, id_cliente):
 	return HttpResponseRedirect(reverse('home:index'))
 
 def ListarClientes(request):
-	clientes = Cliente.objects.all()
-	return render(request, 'cliente/lista.html', {'clientes':clientes})
+	no = False
+	if request.user.is_authenticated:
+		usuario_actual = request.user.id 
+		empleado = Empleado.objects.filter(usuario = usuario_actual)
+		if empleado.exists() == True: 
+			clientes = Cliente.objects.all()
+			return render(request, 'cliente/lista.html', {'clientes':clientes})
+	no = True
+	return render(request, 'cliente/lista.html',{'no':no})

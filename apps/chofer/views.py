@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from apps.chofer.forms import *
 from apps.chofer.models import *
+from apps.administracion.models import Empleado
 from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import login
@@ -65,8 +66,23 @@ def PerfilChofer(request, id_chofer):
 	return render(request, 'chofer/perfil.html')
 
 def ListarChofer(request):
-	choferes = Chofer.objects.all()
-	return render(request, 'chofer/lista.html', {'choferes':choferes})
+	# bandera = False
+	# usuario_actual = request.user.id 
+	# empleado = Empleado.objects.filter(usuario = usuario_actual)
+	# if empleado.exists == True:
+	# 	choferes = Chofer.objects.all()
+	# 	bandera = True
+	# 	return render(request, 'chofer/lista.html', {'choferes':choferes, 'bandera':bandera})
+
+	if request.user.is_authenticated:
+		usuario_actual = request.user.id 
+		empleado = Empleado.objects.filter(usuario = usuario_actual)
+		if empleado.exists() == True: 
+			choferes = Chofer.objects.all()
+			contexto = {'choferes': choferes}
+			return render(request, 'chofer/lista.html', contexto)
+	return render(request, 'chofer/lista.html')
+		
 
 def Trabajar(request,id_chofer):
 	chofer = Chofer.objects.get(id = id_chofer)
