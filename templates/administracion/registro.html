@@ -5,7 +5,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<form action="" method="post" class="form-group">
+				<form action="" method="POST" enctype="multipart/form-data">
 					{% csrf_token %}
 					
 					{{ user_form.as_p }}

@@ -4,6 +4,7 @@
 {% block content %}
 
 
+  {% if empleados %}
 <div class="container">
   <div class="row">
     <div class="col-md-12">
@@ -53,7 +54,7 @@
                   <a href="{% url 'administracion:editar' empleado.usuario.id %}" class="btn btn-primary" title="Editar"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                     {% endif %}
                   {% endif %}
-                  <a href="{% url 'administracion:perfil' empleado.usuario_id %}" class="btn btn-info" title="Perfil">Perfil</i></a>
+                  <a href="{% url 'administracion:perfil' empleado.id %}" class="btn btn-info" title="Perfil">Perfil</i></a>
                 </td>
               </tr>
             {% endfor %}
@@ -77,10 +78,19 @@
     <div class="col-md-4"></div>
   </div> -->
 
-
 </div>
-
-
-
+  {% else %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+          <h2 class="text-center text-primary">El empleado al que intenta acceder no esta disponible o no tiene los permisos necesarios para acceder</h2>
+          <h1 class="text-center text-primary" style="font-size: 110px;"><i class="fa fa-chain-broken" aria-hidden="true"></i></h1>
+      </div>
+      <div class="col-md-12">
+          <a href="{% url 'home:index' %}" class="btn btn-lg btn-primary" style="display: block">Volver a la pagina principal</a>
+      </div>
+    </div>
+  </div>
+{% endif %}
 
 {% endblock %}

@@ -10,7 +10,7 @@ from django.contrib.auth import login
 def index(request):
 	return render(request, 'chofer/index.html')
 
-
+ 
 def RegistrarChofer(request):
 	if request.method == 'POST':
 		user_form = FormUser(request.POST)
@@ -75,4 +75,7 @@ def Trabajar(request,id_chofer):
 	else:
 		chofer.trabajando = True
 	chofer.save()
-	return HttpResponseRedirect(reverse('chofer:perfil id_chofer'))
+	return HttpResponseRedirect('/chofer/perfil/' + str(id_chofer))
+
+def Gestion(request):
+	return render(request, 'chofer/gestion.html')

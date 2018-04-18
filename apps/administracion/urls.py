@@ -13,6 +13,6 @@ urlpatterns = [
 	path('editar/<int:id_empleado>/',EditarEmpleado, name = 'editar'),
 	path('suspender/<int:id_usuario>',Suspender, name = 'suspender'),
 	path('habilitar/<int:id_usuario>',Habilitar, name = 'habilitar'),
-	path('perfil/<int:id_usuario>',PerfilEmpleado, name = 'perfil'),
+	path('perfil/<int:id_empleado>',PerfilEmpleado, name = 'perfil'),
 	path('panel/',Panel, name = 'panel'),
 ]

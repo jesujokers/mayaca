@@ -1,73 +1,88 @@
 {% extends 'base.html' %}
 
+ 
 {% block content %}
+			{% if empleado %}
 <div class="container">
 	<div class="row">
-		<div class="col-md-8">
-			<div class="card mb-3">
-				{% if usuario == user %}
-			  <h3 class="card-header">¡Hola {{ usuario.first_name }}!</h3>
-			    {% else %}
-			    <h3 class="card-header">{{ usuario.first_name }}  {{ usuario.last_name }}</h3>
-			    {% endif %}
-			  <div class="card-body">
-			    <h5 class="card-title">Perfil de {{ usuario.first_name }}</h5>
-			    <img style="height: 90%; width: 60%; display: block; margin-left: auto; margin-right: auto" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22318%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20318%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_158bd1d28ef%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_158bd1d28ef%22%3E%3Crect%20width%3D%22318%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22129.359375%22%20y%3D%2297.35%22%3EImagen%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="Card image">
-			  </div>
-			  <div class="card-body">
-			    <p class="card-text">
-			    	ni aqui: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, atque.
-			    </p>
-			      	<h6 class="card-subtitle text-muted">Fecha de inscripcion: {{ usuario.date_joined }}</h6>
-			  </div>
-			  <ul class="list-group list-group-flush">
-			    <li class="list-group-item"><strong>Cedula:</strong> V-{{ usuario.empleado.cedula }}</li>
-			    <li class="list-group-item"><strong>Nombre:</strong> {{ usuario.first_name }} {{ usuario.last_name }}</li>
-			    <li class="list-group-item"><strong>Email:</strong> {{ usuario.email }}</li>
-			    <li class="list-group-item"><strong>Telefono:</strong> {{ usuario.empleado.telefono }}</li>
-			    <li class="list-group-item"><strong>Fecha de nacimiento:</strong> {{ usuario.empleado.fecha_nacimiento }}</li>
-			    <li class="list-group-item"><strong>Direccion:</strong> {{ usuario.empleado.direccion }}</li>
-			    <li class="list-group-item"><strong>Sueldo:</strong> {{ usuario.empleado.sueldo }}</li>
-			    <li class="list-group-item"><strong>Rol:</strong> {{ usuario.empleado.rol }}</li>
-
-			  </ul>
-			  <div class="card-body">
-			    <a href="{% url 'administracion:editar' user.id %}" class="card-link btn btn-primary">Modificar Perfil</a>
-			    <a href="{% url 'administracion:listar' %}" class="card-link">Volver</a>
-			  </div>
-			  <div class="card-footer text-muted">
-			    Ultima Sesión: {{ usuario.last_login }}
-			  </div>
-			</div>
-
+		<div class="col-md-3">
+			<img style="height: 80%; width: 100%; display: block; margin-left: auto; margin-right: auto; border-radius: 10px; margin-bottom: 10px;" src="/static/media/{{ empleado.foto }}" alt="Foto de {{ empleado.usuario.first_name }}" class="img-responsive">
+			<h4>{{ empleado.usuario.first_name }} {{ empleado.usuario.last_name }}</h4>
+			<h4 class="text-muted">{{empleado.usuario.username}}</h4>
 		</div>
-		<div class="col-md-4">
-			<div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-			  <div class="card-header">Gestiones</div>
-			  <div class="card-body">
-			    <h4 class="card-title">Operaciones: </h4>
-			    <h5>Usuarios:</h5>
-			    <p>Usuarios registrados: 3</p>
-			    <p>Usuarios Suspendidos: 2</p>
-			    <p>Usuarios Eliminados: 3</p>
-			    <p>Usuarios Editados: 7</p>
-			    <h5>Empleados:</h5>
-			    <p>Empleados registrados: 3</p>
-			    <p>Empleados Suspendidos: 2</p>
-			    <p>Empleados Eliminados: 3</p>
-			    <p>Empleados Editados: 7</p>
-			  </div>
-			</div>
-			<div class="card border-info mb-3" style="max-width: 20rem;">
-			  <div class="card-header">Viajes</div>
-			  <div class="card-body">
-			    <p class="card-text">Viajes Registrados: 2</p>
-			    <p class="card-text">Viajes Cancelados: 2</p>
-			    <p class="card-text">Viajes Completados: 2</p>
-			    <p class="card-text">Viajes Totales: 6</p>
-			  </div>
+		<div class="col-md-9">
+			<h3 class="text-center">Resumen de viajes</h3>
+			<hr>
+			<div class="row">
+				<div class="col-md-6 form-control">
+					<h4>Viajes Totales</h4>
+					<h2 class="text-center text-primary">15</h2>
+				</div>
+				<div class="col-md-6 form-control">
+					<h4>Viajes Cancelados</h4>
+					<h2 class="text-center text-danger">7</h2>
+				</div>
+				<div class="col-md-6 form-control">
+					<h4>Viajes Realizados</h4>
+					<h2 class="text-center text-success">2</h2>
+				</div>
+				<div class="col-md-6 form-control">
+					<h4>Viajes Pendientes</h4>
+					<h2 class="text-center text-warning">6</h2>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<div class="container">
+
+	<div class="row">
+		<div class="col-md-3"></div>
+		<hr>
+		<div class="col-md-9">
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="text-center text-primary" style="margin-bottom: 20px;">Datos del Chofer</h2>
+					<div class="row">
+						<div class="col-md-6">
+							<p><strong>Cedula:</strong> V-{{ empleado.cedula }}</p>
+							<p><strong>Nombre:</strong> {{ empleado.usuario.first_name }} {{ empleado.usuario.last_name }}</p>
+							<p><strong>Email:</strong> {{ empleado.usuario.email }}</p>
+							<p><strong>Dirección:</strong> {{ empleado.direccion }}</p>
+							{% if empleado.rol == 'Administrador' %}
+							<p><strong>Rol:</strong> Administrador <i class="fa fa-steam text-warning" aria-hidden="true"></i></p>
+							{% else %}
+							<p><strong>Rol:</strong> Empleado <i class="fa fa-id-card text-warning" aria-hidden="true"></i></p>
+							{% endif %}
+						</div>
+						<div class="col-md-6">
+							<p><strong>Telefono:</strong> {{ empleado.telefono }}</p>
+							<p><strong>Sueldo:</strong> {{ empleado.sueldo }}</p>
+							<p><strong>Fecha de nacimiento:</strong> {{ empleado.fecha_nacimiento }}</p>
+							<p><strong>Fecha de Ingreso:</strong> {{ empleado.usuario.date_joined }}</p>
+						</div>
+					</div>
+					<p class="text-center">Última Sesión: {{ empleado.usuario.last_login }}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+	{% else %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+			    <h2 class="text-center text-primary">El empleado al que intenta acceder no esta disponible o no tiene los permisos necesarios para acceder</h2>
+			    <h1 class="text-center text-primary" style="font-size: 110px"><i class="fa fa-chain-broken" aria-hidden="true"></i></h1>
+			</div>
+			<div class="col-md-5"></div>
+			<div class="col-md-2">
+			    <a href="{% url 'home:index' %}" class="btn btn-default text-center">Volver a la pagina principal</a>
+			</div>
+			<div class="col-md-5"></div>
+		</div>
+	</div>
+	{% endif %}
+
 {% endblock content %}

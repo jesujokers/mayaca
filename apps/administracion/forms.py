@@ -32,8 +32,18 @@ class FormEmpleado(forms.ModelForm):
 			'sueldo',
 			'fecha_nacimiento',
 			'direccion',
-			'telefono'
+			'telefono',
+			'foto'
 			)
+		labels = {
+			'cedula': 'Cedula',
+			'sueldo': 'Sueldo',
+			'fecha_nacimiento': 'Fecha Nacimiento',
+			'direccion': 'Direccion',
+			'telefono': 'Telefono',
+			'foto': 'Foto del Empleado',
+		}
+
 class FormPermisos(forms.ModelForm):
 	class Meta:
 		model = Permisos

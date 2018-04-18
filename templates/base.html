@@ -75,7 +75,7 @@
 				  {% if user.empleado %}
 			      <a class="dropdown-item" href="{% url 'administracion:panel' %}"> <i class="fa fa-binoculars" aria-hidden="true"></i> Administrar </a>
 			      {% elif user.chofer %}
-			      <a class="dropdown-item" href="{% url 'administracion:panel' %}"> <i class="fa fa-binoculars" aria-hidden="true"></i> Mis Viajes </a>
+			      <a class="dropdown-item" href="{% url 'chofer:gestion' %}"> <i class="fa fa-binoculars" aria-hidden="true"></i> Mis Viajes </a>
 				  {% endif %}
 				  <!-- ====================== -->
 				  {% if user.cliente %}
@@ -89,7 +89,7 @@
 				  {% elif user.chofer %}
 				  <a class="dropdown-item" href="{% url 'chofer:perfil' user.chofer.id %}"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Perfil </a>
 				  {% elif user.empleado or user %}
-			      <a class="dropdown-item" href="{% url 'administracion:perfil' user.id %}"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Perfil </a>
+			      <a class="dropdown-item" href="{% url 'administracion:perfil' user.empleado.id %}"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Perfil </a>
 				  {% endif %}
 				  <!-- ====================== Log Out ====================== -->
 			      <div class="dropdown-divider"></div>
