@@ -26,8 +26,10 @@ class FormCliente(forms.ModelForm):
 		fields = [
 			'cedula',
 			'telefono',
+			'foto',
 		]
 		labels = {
 			'cedula': 'Cedula',
 			'telefono': 'Telefono',
+			'foto': 'Foto',
 		}

@@ -18,27 +18,11 @@ from mayaca.settings import Precio
 def index(request):
 	return render(request, 'administracion/index.html')
 
-class RegistroUsuario(CreateView):
-	model = User 
-	form_class = FormUser
-	template_name = 'administracion/registro.html' 
-	success_url = reverse_lazy('administracion/listar')
-
-class UsuarioListar(ListView):
-	model = User
-	template_name = 'administracion/lista.html'
-	paginate_by = 4
-
 class UsuarioDelete(DeleteView):
 	model = User 
 	template_name = 'administracion/delete.html'
 	success_url = reverse_lazy('administracion:listar')
 
-class UsuarioUpdate(UpdateView):
-	model = User 
-	template_name = 'administracion/registro.html'
-	form_class = FormUser
-	success_url = reverse_lazy('home:index')
 
 def Suspender(request, id_usuario):
 	usuario = User.objects.get(id = id_usuario)
@@ -145,15 +129,13 @@ def ListarEmpleado(request):
 
 def PerfilEmpleado(request, id_empleado):
 	if request.user.is_authenticated:
-		empleado = Empleado.objects.filter(usuario = request.user.id)
+		usuario_actual = request.user.id 
+		empleado = Empleado.objects.filter(usuario = usuario_actual)
 		if empleado.exists() == True:
-			usuario_actual = request.user.id 
-			empleado = Empleado.objects.filter(usuario = usuario_actual)
+			empleado = Empleado.objects.filter(id = id_empleado)
 			if empleado.exists() == True:
-				empleado = Empleado.objects.filter(id = id_empleado)
-				if empleado.exists == True:
-					empleado = Empleado.objects.get(id = id_empleado)
-					return render(request, 'administracion/perfil.html', {'empleado':empleado})
+				empleado = Empleado.objects.get(id = id_empleado)
+				return render(request, 'administracion/perfil.html', {'empleado':empleado})
 	return render(request, 'administracion/perfil.html')
 
 def Panel(request):

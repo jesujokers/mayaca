@@ -16,13 +16,14 @@ def index(request):
  
 def RegistrarCliente(request):
 	if request.method == 'POST':
-		form_cliente = FormCliente(request.POST)
+		form_cliente = FormCliente(request.POST, request.FILES)
 		form_user = FormUser(request.POST)
 		if form_user.is_valid() and form_cliente.is_valid():
 			usuario = form_user.save()
 			usuario.refresh_from_db()
 			cliente = Cliente(
 				usuario = usuario,
+				foto = request.FILES['foto'],
 				cedula = form_cliente.cleaned_data['cedula'],
 				telefono = form_cliente.cleaned_data['telefono'],
 				)
