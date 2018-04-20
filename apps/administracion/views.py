@@ -107,7 +107,9 @@ def EditarEmpleado(request,id_empleado):
 					descripcion = "Edicion"
 					)
 				bitacora.save()
-				login(request, usuario)
+				if request.user.is_authenticated:
+					return HttpResponseRedirect(reverse('administracion:listar'))
+				login(request, user)
 				return HttpResponseRedirect(reverse('home:index'))
 	return render(request, 'administracion/registro.html',{
 		'empleado_form': empleado_form,

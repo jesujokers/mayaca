@@ -12,6 +12,6 @@ class Cliente(models.Model):
 	rol = models.CharField(max_length = 20)
 
 class BitacoraCliente(models.Model):
-	user = models.ForeignKey(Cliente, on_delete = 'cascade', default = None)
+	user = models.ForeignKey(User, on_delete = 'cascade', default = None)
 	descripcion = models.CharField(max_length = 20)
 	fecha = models.DateField(default = datetime.today)

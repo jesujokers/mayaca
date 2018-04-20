@@ -69,7 +69,7 @@
 			      {% if user.cliente %}
 			      <a class="dropdown-item" href="{% url 'cliente:editar' user.cliente.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modificar perfil  </a>
 			      {% elif user.chofer %}
-			      <a class="dropdown-item" href="{% url 'chofer:editar' user.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modificar perfil  </a>
+			      <a class="dropdown-item" href="{% url 'chofer:editar' user.chofer.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modificar perfil  </a>
 			      {% endif %}
 			      <!-- ================== Administrar ====================  -->
 				  {% if user.empleado %}

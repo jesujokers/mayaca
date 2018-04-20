@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-{% if contexto %}
-    
 
+{% if bandera %}
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
+			<a href="{% url 'chofer:registrar' %}" class="btn btn-primary">Agregar nuevo chofer</a>
 			 <table class="table table-hover">
 		        <thead>
 		          <tr>
@@ -17,8 +17,8 @@
 		            <th class="text-center">Acciones</th>
 		          </tr>
 		        </thead>
+		        {% if choferes %}
 		        <tbody>
-		        	{% if choferes %}
 		        	    {% for chofer in choferes%}
 		      		    <tr>
 		      		      <th scope="row"></th>
@@ -27,16 +27,40 @@
 		      		      <td>{{ chofer.usuario.email }}</td>
 		      		      <td>{{ chofer.telefono }}</td>
 		      		      <td>
-		      		      <a href="/administracion/eliminar/1/" class="btn btn-danger" title="Eliminar"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+		      		      <a href="#borrar" data-toggle="modal" class="btn btn-danger" title="Eliminar"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+		      		      <!-- ========== Modal de eliminar =============== -->
+							<div class="modal fade" id="borrar">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title">Confirmacion</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+									<div class="modal-body">
+										<p>¿Esta seguro que desea eliminar este chofer?</p>
+										<p><strong>Nombre:</strong> {{ chofer.usuario.first_name }} {{ chofer.usuario.last_name }}</p>
+									</div>
+									<div class="modal-footer">
+											<a href="{% url 'chofer:eliminar' chofer.id %}" class="btn btn-primary">Guardar Cambios</a>
+											<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+										</div>
+									</div>
+								</div>
+							</div>
+		      		      <!-- ========== Fin Modal de eliminar =========== -->
 		                  <a href="/administracion/habilitar/1" class="btn btn-success" title="Habilitar"><i class="fa fa-unlock" aria-hidden="true"></i></a>
-		                  <a href="/administracion/editar/1/" class="btn btn-primary" title="Editar"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+		                  <a href="{% url 'chofer:editar' chofer.id %}" class="btn btn-primary" title="Editar"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 		                  <a href="{% url 'chofer:perfil' chofer.id %}" class="btn btn-info" title="Perfil">Perfil</i></a>
 		      		      </td>
 		      		    </tr>
 		        		{% endfor %}
-		        	{% endif %}
 		        </tbody>
-		      </table> 
+		        {% else %}
+	        	    <h1 class="text-primary text-center">No hay registros disponibles</h1>
+	        	{% endif %}
+		     </table> 
 		</div>
 	</div>
 </div>
@@ -44,7 +68,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<h2 class="text-center text-primary">El Chofer al que intenta acceder no esta disponible o no tiene los permisos necesarios para acceder</h2>
+			<h2 class="text-center text-primary">El enlace al que intenta acceder no esta disponible o no tiene los permisos necesarios para acceder</h2>
 			<h1 class="text-center text-primary" style="font-size: 110px;"><i class="fa fa-chain-broken" aria-hidden="true"></i></h1>
 		</div>
 		<div class="col-md-12">
