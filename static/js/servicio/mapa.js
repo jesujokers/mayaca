@@ -80,7 +80,7 @@ function computeTotalDistance(result) {
   $("input*[name='destino']").val(myroute.legs[0].end_address); 
   $('.distancia-form').val(total);
 
-}
+} 
 
   google.maps.event.addDomListener(window, 'load', initialize);
   

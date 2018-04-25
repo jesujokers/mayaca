@@ -30,17 +30,21 @@ def confirmar(request):
 					'clientes': clientes
 					}
 		return render(request, 'servicio/confirmar.html', contexto)	
+	return HttpResponseRedirect(reverse('home:index'))
 
 def RegistrarViaje(request):
 	if request.method == 'POST':
-		chofer = Chofer.objects.get(trabajando = True)
+		chofer = Chofer.objects.filter(trabajando = True)
+		if chofer.exists() == True:
+			chofer = Chofer.objects.get(trabajando = True)
+		else:
+			chofer = False
+			return render(request, 'servicio/pedido.html', {'chofer': chofer})
 		cliente = Cliente.objects.get(cedula = request.POST['cliente'])
 		cuando = request.POST['fecha']
 		fecha = datetime.today()
 		precio = 5000
 
-		# if cuando == 'reservar':
-		# 	fecha = request.POST['fecha_re']
 		distancia = Distancia(
 			origen = request.POST['origen'],
 			destino = request.POST['destino'],

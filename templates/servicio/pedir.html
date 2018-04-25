@@ -9,6 +9,13 @@
 <script src="{% static 'js/servicio/mapa.js' %}"></script>
 	<div id="map-canvas"></div>
 
+	{% if user.cliente %}
+	    <div class="tutorial">
+	    	<div class="indicador"></div>
+	    	<p>Aqui puedes tal....</p>
+	    </div>	
+	{% endif %}
+
 	<div id="logo" class="buscador" style="z-index: 2001; left: 0; top: 0; width: 185px; height: 60px; background: #2C3E50; opacity: 0.8;">
 		<a class="navbar-brand" href="{% url 'home:index' %}">
 		  	<img src="{% static 'img/icono.ico' %}" alt="">
@@ -20,7 +27,7 @@
 		<form action="{% url 'servicio:confirmar' %}" method="POST" id="formulario">
 			{% csrf_token %}
 				<div class="form-group">
-				  <input type="text" class="form-control" placeholder="Origen" id="origen">
+				  <input type="text" class="form-control" placeholder="Origen" id="origen" name="origen">
 				  <input type="hidden" name="origen" id="origen">
 				</div>
 				<div class="form-group">

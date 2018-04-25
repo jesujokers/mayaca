@@ -6,7 +6,7 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 				{% if viaje %}
-				<h2 class="text-primary text-center">Detalles del viaje</h2>
+				<h2 class="text-primary text-center">Detalles del viaje <i class="fa fa-taxi" aria-hidden="true"></i></h2>
 				<p><strong>Número de Viaje:</strong> #{{ viaje.id }}</p>
 				<p><strong>Cliente:</strong> {{ viaje.cliente.usuario.first_name }}</p>
 				<p><strong>Chofer:</strong> {{ viaje.chofer.usuario.first_name }}</p>

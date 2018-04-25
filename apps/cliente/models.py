@@ -9,7 +9,6 @@ class Cliente(models.Model):
 	foto = models.ImageField(upload_to = 'ClienteFotos/', blank = True)
 	cedula = models.CharField(max_length = 10, unique = True)
 	telefono = models.CharField(max_length = 12)
-	rol = models.CharField(max_length = 20)
 
 class BitacoraCliente(models.Model):
 	user = models.ForeignKey(User, on_delete = 'cascade', default = None)

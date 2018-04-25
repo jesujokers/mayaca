@@ -39,13 +39,20 @@ def RegistrarCliente(request):
 		})
 	
 def PerfilCliente(request,id_cliente):
-	cliente = Cliente.objects.get(id = id_cliente)
-	return render(request, 'cliente/perfil.html', {'cliente':cliente})
+	if request.user.is_authenticated:
+		usuario_actual = request.user.id
+		cliente = Cliente.objects.filter(id = id_cliente)
+		if cliente.exists() == True:
+			cliente = Cliente.objects.get(id = id_cliente)
+			if cliente.usuario_id == usuario_actual:
+				return render(request, 'cliente/perfil.html', {'cliente':cliente})
+	return render(request, 'cliente/perfil.html')
 
 def EditarCliente(request,id_cliente):
 	bandera = False
 	bandera2 = False
 	usuario_actual = request.user.id 
+	editar = True
 
 	# Comprobacion de si es el cliente actual
 	cliente = Cliente.objects.filter(id = id_cliente)
@@ -78,7 +85,8 @@ def EditarCliente(request,id_cliente):
 				return HttpResponseRedirect(reverse('home:index'))
 		return render(request, 'cliente/registro.html',{
 			'form_cliente': form_cliente,
-			'form_user': form_user
+			'form_user': form_user,
+			'editar': editar
 			})
 	else:
 		return render(request, 'cliente/registro.html')

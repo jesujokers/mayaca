@@ -5,19 +5,28 @@
     <div class="container">
     	<div class="row">
     		<div class="col-md-12">
-    			<h2 class="text-center">¡Taxi pedido!</h2>
+            {% if viaje and distancia %}
+                    
+                
+                <h2 class="text-center">¡Taxi pedido!</h2>
                 <!-- <img width="300px" src="{% static 'img/check.png' %}" alt=""> -->
                 <h1 class="text-center text-success"><i class="fa fa-check" aria-hidden="true"></i></h1>
-    			<p class="text-center"><strong>Número de solicitud:</strong> #{{ viaje.id }}</p>
-    			<p><strong>Origen:</strong> {{ distancia.origen }}</p>
-    			<p><strong>Destino: </strong>{{ distancia.destino }}</p>
-    			<p class="text-center"><strong>Precio</strong>: Bs. {{ viaje.precio }} </p>
-    			<p class="text-center"><strong>Nombre del Chofer:</strong> {{ viaje.chofer.usuario.first_name }} {{ viaje.chofer.usuario.last_name }}</p>
+                <p class="text-center"><strong>Número de solicitud:</strong> #{{ viaje.id }}</p>
+                <p><strong>Origen:</strong> {{ distancia.origen }}</p>
+                <p><strong>Destino: </strong>{{ distancia.destino }}</p>
+                <p class="text-center"><strong>Precio</strong>: Bs. {{ viaje.precio }} </p>
+                <p class="text-center"><strong>Nombre del Chofer:</strong> {{ viaje.chofer.usuario.first_name }} {{ viaje.chofer.usuario.last_name }}</p>
                <div class="botones" style="display: flex; justify-content: end;">
                     <a href="{% url 'servicio:detalles' viaje.id %}" class="btn btn-primary" style="left: 0">Ver detalles</a>
                    <a href="{% url 'home:index' %}" class="btn btn-success" style="left: 0">Pagina de inicio</a>
                </div>
-    		</div>
+            {% else %}
+                <h1 class="text-primary text-center">
+                    Lo sentimos no hay chofer disponible intentelo mas tarde :(
+                </h1>       
+                <h1 class="text-center text-primary" style="font-size: 110px"><i class="fa fa-chain-broken" aria-hidden="true"></i></h1>
+            {% endif %}
+            </div>
     	</div>
     </div>
 {% endblock content %}

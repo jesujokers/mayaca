@@ -11,8 +11,11 @@
 					{% csrf_token %}
 					{{ form_user.as_p }}
 					{{ form_cliente.as_p }}
-
-					<button type="submit" class="btn btn-primary">Registrarse</button>
+					{% if editar %}
+						<button type="submit" class="btn btn-primary">Guardar Cambios</button>
+					{% else %}
+					    <button type="submit" class="btn btn-primary">Registrarse</button>
+					{% endif %}
 				</form>
 			</div>
 		</div>
