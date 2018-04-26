@@ -1,4 +1,4 @@
-{% load staticfiles %}
+  {% load staticfiles %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -89,11 +89,19 @@
 			      {% elif user.chofer %}
 			      <a class="dropdown-item" href="{% url 'chofer:gestion' %}"> <i class="fa fa-binoculars" aria-hidden="true"></i> Mis Viajes </a>
 				  {% endif %}
-				  <!-- ====================== -->
+				  <!-- =========== Viajes Cliente =============== -->
 				  {% if user.cliente %}
 				  <a class="dropdown-item" href="{% url 'cliente:viajes' user.cliente.id %}"><i class="fa fa-binoculars" aria-hidden="true"></i> Viajes</a>    
 				  {% endif %}
-				  <!-- ====================== -->
+				  <!-- ============ Fin Viajes Cliente ========== -->
+
+				  <!-- ================= Cambiar Precio ================  -->
+  {% if user.empleado %}
+      {% if user.empleado.rol == 'Administrador' %}
+		<a href="#confirm1" data-toggle="modal" class="dropdown-item" title="Despachar Viaje"><i class="fa fa-usd" aria-hidden="true"></i> Cambiar Precio</a>
+      {% endif %}				  
+  {% endif %}
+				  <!-- ================= Fin Cambiar Precio ================  -->
 
 				  <!-- =============== Perfil ===================== -->
 				  {% if user.cliente %}
@@ -126,6 +134,52 @@
     	{% endif %}
 		  </div>
 		</nav>
+{% if user.is_authenticated %}
+	{% if user.empleado %}
+		{% if user.empleado.rol == 'Administrador' %}
+		<div class="modal fade" id="confirm1">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Cambiar de Precio <i class="fa fa-usd" aria-hidden="true"></i></h4>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<!-- ====== Formulario ======= -->
+							<div class="form-group" style="margin: 0 70px;">
+							  <label class="control-label">Nuevo Precio del Servicio (Por Kilometro)</label>
+							  <div class="form-group">
+							    <div class="input-group mb-3">
+							      <div class="input-group-prepend">
+							        <span class="input-group-text">Bs.</span>
+							      </div>
+							      <input class="form-control" aria-label="Amount (to the nearest dollar)" type="text">
+							      <div class="input-group-append">
+							        <span class="input-group-text">.00</span>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+							<!-- ====== Fin Formulario ======= -->
+							<p class="text-primary">
+								Esta tarea solo puede ser realizada por un administrador, de ahora en adelante el precio por el servicio (valor por kilometros) sera el que establezca
+							</p>
+							<h3 class="text-center text-primary">
+								<i class="fa fa-steam" aria-hidden="true"></i> {{ user.first_name }} {{ user.last_name }}
+							</h3>
+						</div>
+						<div class="modal-footer">
+							<a href="#" class="btn btn-success">Despachar</a>
+							<button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+	{% endif %}
+{% endif %}
 	{% endblock %}
 	{% block content %}
 	{% endblock %}

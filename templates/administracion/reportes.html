@@ -2,13 +2,113 @@
 
 
 {% block content %}
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h2 class="text-center">Reportes</h2>
-				<h3>Diario</h3>
-				<h3>Especificos</h3>
+	{% if viajes %}
+	    <div class="container">
+	    	<div class="row">
+	    		<div class="col-md-12">
+	    			<h2 class="text-center text-primary">Reportes <i class="fa fa-bar-chart" aria-hidden="true"></i></h2>
+	    		</div>
+	    		<div class="col-md-12">
+	    			<div class="row">
+	    				<div class="col-md-12">
+				<div class="form-control">
+				<h4 class="text-center text-primary" style="margin-top: 10px">Tipo de Reporte</h4>
+					<!-- =============== Tipos ============== -->
+	
+								<div class="custom-control custom-radio">
+									<input id="general" name="tipo_reporte" class="custom-control-input" type="radio">
+									<label class="custom-control-label" for="general">General</label>
+								</div>
+								<div class="custom-control custom-radio">
+									<input id="especifico" name="tipo_reporte" class="custom-control-input" type="radio">
+									<label class="custom-control-label" for="especifico">Específico</label>
+								</div>
+								<!-- =============== Fin Tipos ============== -->
+								<!-- =============== Fecha ============== -->
+								<h4 class="text-primary text-center" style="margin: 10px 0">Rango</h4>
+								
+								<div class="row">
+									<div class="col-md-6">
+										<div class="custom-control custom-radio">
+											<input id="predefinida" name="rango_fecha" class="custom-control-input" type="radio">
+											<label class="custom-control-label" for="predefinida">Predefinida</label>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<select name="rango" id="" class="form-control">
+											<option value="siempre">Siempre</option>
+											<option value="mes">Mes</option>
+											<option value="mes_anterior">Mes anterior</option>
+											<option value="dia">Dia</option>
+											<option value="dia_anterior">Dia anterior</option>
+										</select>
+									</div>
+								</div>
+	
+	
+								<div class="custom-control custom-radio">
+									<input id="especifica" name="rango_fecha" class="custom-control-input" type="radio">
+									<label class="custom-control-label" for="especifica">Específica</label>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-form-label" for="inputDefault">Desde:</label>
+									<input class="form-control" id="inputDefault" type="date">
+								</div>
+								<div class="form-group">
+									<label class="col-form-label" for="inputDefault">Hasta:</label>
+									<input class="form-control" id="inputDefault" type="date">
+								</div>
+								<!-- =============== Fin Fecha ============== --></div>
+	    				</div>
+	    				<div class="col-md-12" style="margin: 20px 0">
+	    					<h2 class="text-center text-primary">Informacion </h2>
+	    				</div>
+	    				<div class="col-md-6">
+	    					<div class="form-control">
+	    						<h4 class="text-primary text-center">Choferes <i class="fa fa-taxi" aria-hidden="true"></i></h4>
+	    						<p class="text-success">Registrados: </p>
+	    						<p class="text-danger">Eliminados: </p>
+	    						<p class="text-warning">Suspendidos/Habilitados: </p>
+	    					</div>
+	    					<div class="form-control">
+	    						<h4 class="text-primary text-center">Empleados <i class="fa fa-id-card" aria-hidden="true"></i></h4>
+	    						<p class="text-success">Registrados: </p>
+	    						<p class="text-danger">Eliminados: </p>
+	    						<p class="text-warning">Suspendidos/Habilitados: </p>
+	    					</div>
+	    				</div>
+	    				<div class="col-md-6">
+	    					<div class="form-control">
+	    						<h4 class="text-primary text-center">Cliente <i class="fa fa-user-o" aria-hidden="true"></i></h4>
+	    						<p class="text-success">Registrados: </p>
+	    						<p class="text-danger">Eliminados: </p>
+	    						<p class="text-warning">Suspendidos/Habilitados: </p>
+	    					</div>
+	    					<div class="form-control">
+	    						<h4 class="text-primary text-center">Viajes <i class="fa fa-plane" aria-hidden="true"></i></h4>
+	    						<p>Pendientes: </p>
+	    						<p>Cancelados: </p>
+	    						<p>Despachados: </p>
+	    						<p>Totales: </p>
+	    						<p>Ganancias Obtenidas: </p>
+	    					</div>
+	    				</div>
+	    			</div>
+	    		</div>
+	    	</div>
+	    </div>
+	{% else %}
+	    <div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="text-center text-primary">El Chofer al que intenta acceder no esta disponible o no tiene los permisos necesarios para acceder</h2>
+					<h1 class="text-center text-primary" style="font-size: 110px;"><i class="fa fa-chain-broken" aria-hidden="true"></i></h1>
+				</div>
+				<div class="col-md-12">
+					<a href="{% url 'home:index' %}" class="btn btn-lg btn-primary" style="display: block">Volver a la pagina principal</a>
+				</div>
 			</div>
 		</div>
-	</div>
+	{% endif %}
 {% endblock %}

@@ -12,7 +12,7 @@
 				<p><strong>Chofer:</strong> {{ viaje.chofer.usuario.first_name }}</p>
 				<p><strong>Fecha de Solicitud:</strong> {{ viaje.fecha_so }}</p>
 				<p><strong>Fecha de Carrera:</strong> {{ viaje.fecha_re }}</p>
-				<p><strong>Precio: </strong>{{ viaje.precio }}</p>
+				<p><strong>Precio: </strong>{{ viaje.precio|floatformat:2 }} Bs.</p>
 				<p><strong>Estado: </strong> 
 					{% if viaje.estado == 'P' %}
 					    Pendiente
@@ -24,7 +24,7 @@
 				</p>
 				<p><strong>Origen: </strong> {{ viaje.origen_destino.origen }}</p>
 				<p><strong>Destino: </strong> {{ viaje.origen_destino.destino }}</p>
-				<p><strong>Distancia: </strong> {{ viaje.origen_destino.distancia }} Km</p>
+				<p><strong>Distancia: </strong> {{ viaje.origen_destino.distancia|floatformat:3 }} Km</p>
 				{% else %}
 				    <h1 class="text-center text-primary">El viaje al que intenta acceder no esta disponible</h1>
 				{% endif %}

@@ -157,3 +157,11 @@ def Panel(request):
 def CambiarPrecio(request,precio_nuevo):
 	Precio = precio_nuevo
 	return HttpResponseRedirect(reverse('home:index'))
+
+def Reportes(request):
+	usuario_actual = request.user.id 
+	empleado = Empleado.objects.filter(usuario_id = usuario_actual)
+	if empleado.exists() == True:
+		viajes = Viaje.objects.all()
+		return render(request, 'administracion/reportes.html', {'viajes': viajes})
+	return render(request, 'administracion/reportes.html')
