@@ -20,7 +20,7 @@ class FormUser(UserCreationForm):
 		labels = {
 			'username' : 'Nombre de Usuario',
 			'first_name': 'Nombre',
-			'last_name': 'Apeliido' ,
+			'last_name': 'Apellido' ,
 			'email': 'Correo Electronico',
 		}
 
