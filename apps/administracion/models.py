@@ -4,14 +4,11 @@ from datetime import date, datetime
 
 # Create your models here.
 
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 class Permisos(models.Model):
 	agregar = models.BooleanField()
 	eliminar = models.BooleanField()
 	editar = models.BooleanField()
-	actualizar = models.BooleanField()
 	suspender = models.BooleanField()
 	habilitar = models.BooleanField()
 

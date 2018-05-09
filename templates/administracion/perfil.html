@@ -135,7 +135,7 @@
 							<p><strong>Sueldo:</strong> {{ empleado.sueldo }}</p>
 							<p><strong>Fecha de nacimiento:</strong> {{ empleado.fecha_nacimiento }}</p>
 							<p><strong>Fecha de Ingreso:</strong> {{ empleado.usuario.date_joined }}</p>
-							<a href="{% url 'administracion:editar' empleado.usuario.id %}" class="btn btn-primary" style="right: 0">Editar Perfil</a>
+							<a href="{% url 'administracion:editar' empleado.id %}" class="btn btn-primary" style="right: 0">Editar Perfil</a>
 						</div>
 					</div>
 					<p class="text-center" style="margin-top: 10px">Última Sesión: {{ empleado.usuario.last_login }}</p>

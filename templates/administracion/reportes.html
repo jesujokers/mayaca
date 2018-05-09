@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 
 {% block content %}
@@ -26,16 +27,16 @@
 								<!-- =============== Fin Tipos ============== -->
 								<!-- =============== Fecha ============== -->
 								<h4 class="text-primary text-center" style="margin: 10px 0">Rango</h4>
-								
+								<br>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="custom-control custom-radio">
-											<input id="predefinida" name="rango_fecha" class="custom-control-input" type="radio">
+											<input id="predefinida" name="rango_fecha" class="custom-control-input" type="radio" disabled="">
 											<label class="custom-control-label" for="predefinida">Predefinida</label>
 										</div>
 									</div>
 									<div class="col-md-6">
-										<select name="rango" id="" class="form-control">
+										<select name="rango" id="rango" class="custom-select" disabled="">
 											<option value="siempre">Siempre</option>
 											<option value="mes">Mes</option>
 											<option value="mes_anterior">Mes anterior</option>
@@ -47,10 +48,10 @@
 	
 	
 								<div class="custom-control custom-radio">
-									<input id="especifica" name="rango_fecha" class="custom-control-input" type="radio">
-									<label class="custom-control-label" for="especifica">Específica</label>
+									<input id="rango_fecha" name="rango_fecha" class="custom-control-input" type="radio" disabled="">
+									<label class="custom-control-label" for="rango_fecha">Específica</label>
 								</div>
-								
+								<br>
 								<div class="form-group">
 									<label class="col-form-label" for="inputDefault">Desde:</label>
 									<input class="form-control" id="inputDefault" type="date">
@@ -67,31 +68,31 @@
 	    				<div class="col-md-6">
 	    					<div class="form-control">
 	    						<h4 class="text-primary text-center">Choferes <i class="fa fa-taxi" aria-hidden="true"></i></h4>
-	    						<p class="text-success">Registrados: </p>
-	    						<p class="text-danger">Eliminados: </p>
-	    						<p class="text-warning">Suspendidos/Habilitados: </p>
+	    						<p class="text-success">Registrados: 0</p>
+	    						<p class="text-danger">Eliminados: 0</p>
+	    						<p class="text-warning">Suspendidos/Habilitados: 0</p>
 	    					</div>
 	    					<div class="form-control">
 	    						<h4 class="text-primary text-center">Empleados <i class="fa fa-id-card" aria-hidden="true"></i></h4>
-	    						<p class="text-success">Registrados: </p>
-	    						<p class="text-danger">Eliminados: </p>
-	    						<p class="text-warning">Suspendidos/Habilitados: </p>
+	    						<p class="text-success">Registrados: 0</p>
+	    						<p class="text-danger">Eliminados: 0</p>
+	    						<p class="text-warning">Suspendidos/Habilitados: 0</p>
 	    					</div>
 	    				</div>
 	    				<div class="col-md-6">
 	    					<div class="form-control">
 	    						<h4 class="text-primary text-center">Cliente <i class="fa fa-user-o" aria-hidden="true"></i></h4>
-	    						<p class="text-success">Registrados: </p>
-	    						<p class="text-danger">Eliminados: </p>
-	    						<p class="text-warning">Suspendidos/Habilitados: </p>
+	    						<p class="text-success">Registrados: 0</p>
+	    						<p class="text-danger">Eliminados: 0</p>
+	    						<p class="text-warning">Suspendidos/Habilitados: 0</p>
 	    					</div>
 	    					<div class="form-control">
 	    						<h4 class="text-primary text-center">Viajes <i class="fa fa-plane" aria-hidden="true"></i></h4>
-	    						<p>Pendientes: </p>
-	    						<p>Cancelados: </p>
-	    						<p>Despachados: </p>
-	    						<p>Totales: </p>
-	    						<p>Ganancias Obtenidas: </p>
+	    						<p>Pendientes: 0</p>
+	    						<p>Cancelados: 0</p>
+	    						<p>Despachados: 0</p>
+	    						<p>Totales: 0</p>
+	    						<p>Ganancias Obtenidas: 0</p>
 	    					</div>
 	    				</div>
 	    			</div>
@@ -111,4 +112,6 @@
 			</div>
 		</div>
 	{% endif %}
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/administracion/reportes.js' %}"></script>
 {% endblock %}

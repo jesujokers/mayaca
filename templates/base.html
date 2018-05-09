@@ -6,6 +6,7 @@
 	<meta charset="UTF-8">
 	<title>MayacaExpress</title>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<script src="{% static 'js/jquery.min.js' %}"></script>
 	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/estilos.css' %}">
 	<link rel="stylesheet" href="{% static 'css/awesome/font-awesome.min.css' %}">
@@ -82,6 +83,8 @@
 			      <a class="dropdown-item" href="{% url 'cliente:editar' user.cliente.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modificar perfil  </a>
 			      {% elif user.chofer %}
 			      <a class="dropdown-item" href="{% url 'chofer:editar' user.chofer.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modificar perfil  </a>
+			      {% elif user.empleado %}
+			      <a class="dropdown-item" href="{% url 'administracion:editar' user.empleado.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modificar perfil  </a>
 			      {% endif %}
 			      <!-- ================== Administrar ====================  -->
 				  {% if user.empleado %}
@@ -207,8 +210,22 @@
 				</div>
 			</div>
 		</footer>
+		{% block transformacion %}
+		    <script>
+				var campos = document.getElementsByTagName('input');
+
+				for (var campo of campos){
+
+					if (campo.type != undefined && (campo.type === "password" || campo.type === "text")){
+						campo.setAttribute('class', 'form-control');
+						campo.setAttribute('required', '');
+					}
+				}
+
+			</script>
+		{% endblock transformacion %}
 	{% endblock %}
-	<script src="{% static 'js/jquery.min.js' %}"></script>
+	
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="{% static 'js/servicio/confirmar.js' %}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

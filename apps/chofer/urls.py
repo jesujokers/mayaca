@@ -12,4 +12,6 @@ urlpatterns = [
 	path('trabajar/<int:id_chofer>/', Trabajar, name = 'trabajar'),
 	path('gestion/',Gestion, name = 'gestion'),
 	path('eliminar/<int:id_chofer>', EliminarChofer, name = 'eliminar'),
+	path('suspender/<int:id_chofer>', SuspenderChofer, name = 'suspender'),
+	path('habilitar/<int:id_chofer>', HabilitarChofer, name = 'habilitar'),
 ]

@@ -33,3 +33,7 @@ class FormCliente(forms.ModelForm):
 			'telefono': 'Telefono',
 			'foto': 'Foto',
 		}
+		widgets = {
+			'cedula': forms.TextInput(attrs={'class':'form-control'}),
+			'telefono': forms.TextInput(attrs={'class':'form-control'}),
+		}

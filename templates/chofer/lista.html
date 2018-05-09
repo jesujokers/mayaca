@@ -5,6 +5,13 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
+			<h2 class="text-primary text-center">
+				Lista de choferes
+			</h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
 			<a href="{% url 'chofer:registrar' %}" class="btn btn-primary">Agregar nuevo chofer</a>
 			 <table class="table table-hover">
 		        <thead>
@@ -14,18 +21,30 @@
 		            <th scope="col">Nombre</th>
 		            <th scope="col">Correo Electrónico</th>
 		            <th scope="col">Telefono</th>
+		            <th scope="col">Estado</th>
 		            <th class="text-center">Acciones</th>
 		          </tr>
 		        </thead>
 		        {% if choferes %}
 		        <tbody>
-		        	    {% for chofer in choferes%}
+		        	    {% for chofer in choferes %}
 		      		    <tr>
 		      		      <th scope="row"></th>
 		      		      <td>{{ chofer.id }}</td>
 		      		      <td>{{ chofer.usuario.first_name }}</td>
 		      		      <td>{{ chofer.usuario.email }}</td>
 		      		      <td>{{ chofer.telefono }}</td>
+		      		      <td>
+		      		      	{% if chofer.usuario.last_login == Null and chofer.usuario.is_active == 0 %}
+		      		      	    <p class="btn btn-danger">Por Revisar</p>
+		      		      	{% else %}
+								{% if chofer.usuario.is_active == True %}
+								    <p class="btn btn-success">Habilitado</p>
+								{% else %}
+									<p class="btn btn-warning">Suspendido</p>
+								{% endif %}
+		      		      	{% endif %}
+		      		      </td>
 		      		      <td>
 		      		      <a href="#borrar" data-toggle="modal" class="btn btn-danger" title="Eliminar"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 		      		      <!-- ========== Modal de eliminar =============== -->
@@ -50,7 +69,57 @@
 								</div>
 							</div>
 		      		      <!-- ========== Fin Modal de eliminar =========== -->
-		                  <a href="/administracion/habilitar/1" class="btn btn-success" title="Habilitar"><i class="fa fa-unlock" aria-hidden="true"></i></a>
+		      		      {% if chofer.usuario.is_active == 0 %}
+		                  <a href="#habilitar" data-toggle="modal" class="btn btn-success" title="Habilitar"><i class="fa fa-unlock" aria-hidden="true"></i></a>
+		                  <!-- ================ Modal Habilitar =================== -->
+							<div class="modal fade" id="habilitar">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title">Habilitar</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<h3 class="text-center text-primary">¿Seguro que desea habilitar al siguiente chofer?</h3>
+											<p>Nombre: {{ chofer.usuario.first_name }} {{ chofer.usuario.last_name }}</p>
+											<p>Ultima Sesión {{ chofer.usuario.last_login }}</p>
+										</div>
+										<div class="modal-footer">
+											<a href="{% url 'chofer:habilitar' chofer.id %}" class="btn btn-primary">Confirmar</a>
+											<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+										</div>
+									</div>
+								</div>
+							</div>
+		                  <!-- ================ Fin Modal Habilitar =================== -->
+		      		      {% else %}
+		      		      <a href="#suspender" data-toggle="modal" class="btn btn-warning" title="Suspender"><i class="fa fa-lock" aria-hidden="true"></i></a>
+		      		      <!-- ================ Modal Suspender =================== -->
+							<div class="modal fade" id="suspender">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title">Suspender</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<h3 class="text-center text-primary">¿Seguro que desea suspender al siguiente chofer?</h3>
+											<p>Nombre: {{ chofer.usuario.first_name }} {{ chofer.usuario.last_name }}</p>
+											<p>Ultima Sesión: {{ chofer.usuario.last_login }}</p>
+										</div>
+										<div class="modal-footer">
+											<a href="{% url 'chofer:suspender' chofer.id %}" class="btn btn-primary">Confirmar</a>
+											<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+										</div>
+									</div>
+								</div>
+							</div>
+		                  <!-- ================ Fin Modal Suspender =================== -->
+		      		      {% endif %}
 		                  <a href="{% url 'chofer:editar' chofer.id %}" class="btn btn-primary" title="Editar"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 		                  <a href="{% url 'chofer:perfil' chofer.id %}" class="btn btn-info" title="Perfil">Perfil</i></a>
 		      		      </td>

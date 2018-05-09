@@ -8,6 +8,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
+      <h2 class="text-primary text-center">Lista de Empleados</h2>
+    </div>
+    <div class="col-md-12">
       {% if user.empleado.permisos.agregar == True %}
       <a href="{% url 'administracion:registrar' %}" class="btn btn-primary">Agregar Nuevo Empleado</a>
       {% endif %}
@@ -51,7 +54,7 @@
                   {% endif %}
                     {% endif %}
                     {% if user.empleado.permisos.editar == True %}
-                  <a href="{% url 'administracion:editar' empleado.usuario.id %}" class="btn btn-primary" title="Editar"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                  <a href="{% url 'administracion:editar' empleado.id %}" class="btn btn-primary" title="Editar"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                     {% endif %}
                   {% endif %}
                   <a href="{% url 'administracion:perfil' empleado.id %}" class="btn btn-info" title="Perfil">Perfil</i></a>

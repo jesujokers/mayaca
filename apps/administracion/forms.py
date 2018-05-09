@@ -23,6 +23,12 @@ class FormUser(UserCreationForm):
 			'last_name': 'Apellido' ,
 			'email': 'Correo Electronico',
 		}
+		widgets = {
+			'username' : forms.TextInput(attrs={'class':'form-control'}),
+			'first_name': forms.TextInput(attrs={'class':'form-control'}),
+			'last_name': forms.TextInput(attrs={'class':'form-control'}),
+			'email': forms.TextInput(attrs={'class':'form-control'}),
+		}
 
 class FormEmpleado(forms.ModelForm):
 	class Meta:
@@ -43,6 +49,13 @@ class FormEmpleado(forms.ModelForm):
 			'telefono': 'Telefono',
 			'foto': 'Foto del Empleado',
 		}
+		widgets = {
+			'cedula': forms.TextInput(attrs={'class':'form-control', 'required': ''}),
+			'sueldo': forms.TextInput(attrs={'class':'form-control', 'required': ''}),
+			'fecha_nacimiento': forms.TextInput(attrs={'class':'form-control', 'required': ''}),
+			'direccion': forms.TextInput(attrs={'class':'form-control', 'required': ''}),
+			'telefono': forms.TextInput(attrs={'class':'form-control', 'required': ''}),
+		}
 
 class FormPermisos(forms.ModelForm):
 	class Meta:
@@ -51,7 +64,6 @@ class FormPermisos(forms.ModelForm):
 			'agregar',
 			'eliminar',
 			'editar',
-			'actualizar',
 			'suspender',
 			'habilitar'
 			)
@@ -59,7 +71,6 @@ class FormPermisos(forms.ModelForm):
 			'agregar': 'Agregar',
 			'eliminar': 'Eliminar',
 			'editar': 'Editar',
-			'actualizar': 'Actualizar',
 			'suspender': 'Suspender',
 			'habilitar': 'Habilitar',
 		}

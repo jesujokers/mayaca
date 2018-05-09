@@ -4,21 +4,43 @@
 
 {% if form_cliente or form_usuario %}
 	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<form action="" method="POST" enctype="multipart/form-data">
-
-					{% csrf_token %}
-					{{ form_user.as_p }}
-					{{ form_cliente.as_p }}
+		<form action="" method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			<div class="row" style="margin-bottom: 10px;">
+				<div class="col-md-12">
 					{% if editar %}
-						<button type="submit" class="btn btn-primary">Guardar Cambios</button>
+						<h2 class="text-center text-primary">
+							Editar Cliente
+						</h2>
 					{% else %}
-					    <button type="submit" class="btn btn-primary">Registrarse</button>
-					{% endif %}
-				</form>
+					    <h2 class="text-center text-primary">
+							Registrar Cliente
+						</h2>
+					{% endif %}	
+				</div>
 			</div>
-		</div>
+			<div class="row">
+				<div class="col-md-6"> 
+					{{ form_user.as_p }}
+				</div>
+
+				<div class="col-md-6">
+					{{ form_cliente.as_p }}
+					<div class="row">
+						<div class="col-md-6">
+							{% if editar %}
+								<button type="submit" class="btn btn-primary btn-lg" style="display: block">Guardar Cambios</button>
+							{% else %}
+							    <button type="submit" class="btn btn-primary btn-lg" style="display: block">Registrarse</button>
+							{% endif %}					
+						</div>
+						<div class="col-md-6">
+							<a href="{% url 'home:index' %}" class="btn btn-success btn-lg" style="display: block">Pagina Principal</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
 	</div>
 {% else %}
     <div class="container">
@@ -33,4 +55,5 @@
 		</div>
 	</div>
 {% endif %}
+
 {% endblock content %}

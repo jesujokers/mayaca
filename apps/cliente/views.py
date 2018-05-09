@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from apps.cliente.forms import *
+from apps.cliente.forms import FormCliente
 from django.contrib.auth.models import User
 from apps.cliente.models import *
 from apps.servicio.models import *
 from apps.administracion.models import Empleado
+from apps.administracion.forms import FormUser
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.http import HttpResponse,HttpResponseRedirect
@@ -39,15 +40,23 @@ def RegistrarCliente(request):
 		})
 	
 def PerfilCliente(request,id_cliente):
+	bandera = False
 	if request.user.is_authenticated:
-		usuario_actual = request.user.id
+		usuario_actual = request.user.id 
 		cliente = Cliente.objects.filter(id = id_cliente)
 		if cliente.exists() == True:
-			cliente = Cliente.objects.get(id = id_cliente)
-			if cliente.usuario_id == usuario_actual:
-				return render(request, 'cliente/perfil.html', {'cliente':cliente})
-	return render(request, 'cliente/perfil.html')
+			 cliente = Cliente.objects.get(id = id_cliente)
+			 if cliente.usuario.id == usuario_actual:
+			 	bandera = True
+			 empleado = Empleado.objects.filter(usuario = usuario_actual)
+			 if empleado.exists() == True:
+			 	bandera = True
+			 	print('si se puede')
 
+	if bandera == True:
+		return render(request, 'cliente/perfil.html', {'cliente':cliente})
+	return render(request, 'cliente/perfil.html')
+ 
 def EditarCliente(request,id_cliente):
 	bandera = False
 	bandera2 = False

@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from apps.chofer.forms import *
+from apps.chofer.forms import FormChofer
 from apps.chofer.models import *
+from apps.administracion.forms import FormUser
 from apps.administracion.models import Empleado
 from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse
@@ -152,3 +153,30 @@ def Trabajar(request,id_chofer):
 
 def Gestion(request):
 	return render(request, 'chofer/gestion.html')
+
+
+def SuspenderChofer(request,id_chofer):
+	usuario_actual = request.user.id 
+	empleado = Empleado.objects.filter(usuario = usuario_actual)
+	if empleado.exists() == True:
+		chofer = Chofer.objects.filter(id = id_chofer)
+		if chofer.exists() == True:
+			chofer = Chofer.objects.get(id = id_chofer)
+			usuario = User.objects.get(id = chofer.usuario.id)
+			usuario.is_active = 0
+			usuario.save()
+			return HttpResponseRedirect(reverse('chofer:listar'))
+	return HttpResponseRedirect(reverse('home:index'))
+
+def HabilitarChofer(request,id_chofer):
+	usuario_actual = request.user.id 
+	empleado = Empleado.objects.filter(usuario = usuario_actual)
+	if empleado.exists() == True:
+		chofer = Chofer.objects.filter(id = id_chofer)
+		if chofer.exists() == True:
+			chofer = Chofer.objects.get(id = id_chofer)
+			usuario = User.objects.get(id = chofer.usuario.id)
+			usuario.is_active = 1
+			usuario.save()
+			return HttpResponseRedirect(reverse('chofer:listar'))
+	return HttpResponseRedirect(reverse('home:index'))
