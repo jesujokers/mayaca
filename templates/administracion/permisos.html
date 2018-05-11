@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+{% if empleado %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2 class="text-center text-primary">Permisos del Usuario</h2>
+			<h4>Usuario: {{ empleado.usuario.first_name }} {{ empleado.usuario.last_name }} </h4>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col" class="text-center">Agregar</th>
+						<th scope="col" class="text-center">Modificar</th>
+						<th scope="col" class="text-center">Eliminar</th>
+						<th scope="col" class="text-center">Suspender</th>
+						<th scope="col" class="text-center">Habilitar</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="table-light">
+						<td class="text-center">
+							{% if empleado.permisos.agregar == True %}
+								<i class="fa fa-check" aria-hidden="true" style="color: #40FF00;"></i>
+							{% else %}
+							    <i class="fa fa-times" aria-hidden="true" style="color: #FF0000;"></i>
+							{% endif %}
+						</td>
+						<td class="text-center">
+							{% if empleado.permisos.editar == True %}
+								<i class="fa fa-check" aria-hidden="true" style="color: #40FF00;"></i>
+							{% else %}
+							    <i class="fa fa-times" aria-hidden="true" style="color: #FF0000;"></i>
+							{% endif %}
+						</td>
+						<td class="text-center">
+							{% if empleado.permisos.eliminar == True %}
+								<i class="fa fa-check" aria-hidden="true" style="color: #40FF00;"></i>
+							{% else %}
+							    <i class="fa fa-times" aria-hidden="true" style="color: #FF0000;"></i>
+							{% endif %}
+						</td>
+						<td class="text-center">
+							{% if empleado.permisos.suspender == True %}
+								<i class="fa fa-check" aria-hidden="true" style="color: #40FF00;"></i>
+							{% else %}
+							    <i class="fa fa-times" aria-hidden="true" style="color: #FF0000;"></i>
+							{% endif %}
+						</td>
+						<td class="text-center">
+							{% if empleado.permisos.habilitar == True %}
+								<i class="fa fa-check" aria-hidden="true" style="color: #40FF00;"></i>
+							{% else %}
+							    <i class="fa fa-times" aria-hidden="true" style="color: #FF0000;"></i>
+							{% endif %}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-12">
+			<p class="text-center">Ver el perfil completo de <strong>{{ empleado.usuario.first_name }} {{ empleado.usuario.last_name }} </strong><a href="{% url 'administracion:perfil' empleado.id %}" class="btn btn-outline-primary"> Aqui</a></p>
+		</div>
+	</div>
+</div>
+
+
+{% else %}
+    <div class="container">
+		<div class="row">
+			<div class="col-md-12">
+			    <h2 class="text-center text-primary">El enlace al que intenta acceder no esta disponible o no tiene los permisos necesarios para acceder</h2>
+			    <h1 class="text-center text-primary" style="font-size: 110px"><i class="fa fa-chain-broken" aria-hidden="true"></i></h1>
+			</div>
+			<div class="col-md-12">
+			    <a href="{% url 'home:index' %}" class="btn btn-primary btn-lg" style="display: block">Volver a la pagina principal</a>
+			</div>
+		</div>
+	</div>
+{% endif %}
+    
+{% endblock content %}

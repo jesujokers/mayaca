@@ -9,12 +9,10 @@
 <script src="{% static 'js/servicio/mapa.js' %}"></script>
 	<div id="map-canvas"></div>
 
-	{% if user.cliente %}
-	    <div class="tutorial">
-	    	<div class="indicador"></div>
-	    	<p>Aqui puedes tal....</p>
-	    </div>	
-	{% endif %}
+
+<div class="ventana" style="width: 100%; height: 100%; top: 1px; background: rgba(0,0,0, .3); position: absolute; z-index: 2200; cursor: pointer;" id="ventana" onclick="ocultar()">
+	<img src="{% static 'img/tutorial.jpg' %}" alt="" width="100%"; height="100%;">
+</div>
 
 	<div id="logo" class="buscador" style="z-index: 2001; left: 0; top: 0; width: 185px; height: 60px; background: #2C3E50; opacity: 0.8;">
 		<a class="navbar-brand" href="{% url 'home:index' %}">
@@ -63,8 +61,6 @@
       $('.formulario').css({
         'left': ((anchoVentana - anchoFormulario )/2) - 12
     });
-
-
 });
 
  var anchoVentana = $(window).width();
@@ -73,6 +69,9 @@
       $('.formulario').css({
         'left': ((anchoVentana - anchoFormulario )/2) - 12
     });
+ function ocultar() {
+ 	document.getElementById('ventana').style.display = 'none';
+ }
 </script>
 {% endblock %}
 

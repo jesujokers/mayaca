@@ -28,6 +28,7 @@
             <th scope="col">Nombre</th>
             <th scope="col">Correo Electrónico</th>
             <th scope="col">Rol</th>
+            <th scope="col">Permisos</th>
             <th class="text-center">Acciones</th>
           </tr>
         </thead>
@@ -40,6 +41,7 @@
       		      <td>{{ empleado.usuario.first_name }} {{ empleado.usuario.last_name }}</td>
       		      <td>{{ empleado.usuario.email }}</td>
       		      <td>{{ empleado.rol }}</td>
+                <td><a href="{% url 'administracion:permisos' empleado.id %}" class="btn btn-primary">Ver Permisos</a></td>
       		      <td>
                   {% if empleado.usuario.id == user.id %}
                   {% else %}

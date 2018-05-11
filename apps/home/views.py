@@ -12,3 +12,4 @@ def acerca_de(request):
 
 def terminos(request):
 	return render(request, 'acerca-de/terminos.html')
+

@@ -131,8 +131,8 @@ def EditarEmpleado(request,id_empleado):
 					)
 				bitacora.save()
 				if request.user.is_authenticated:
+					login(request, usuario)
 					return HttpResponseRedirect(reverse('administracion:listar'))
-				login(request, user)
 				print('ola k ase 2')
 				return HttpResponseRedirect(reverse('home:index'))
 		return render(request, 'administracion/registro.html',{
@@ -188,5 +188,20 @@ def Reportes(request):
 	empleado = Empleado.objects.filter(usuario_id = usuario_actual)
 	if empleado.exists() == True:
 		viajes = Viaje.objects.all()
-		return render(request, 'administracion/reportes.html', {'viajes': viajes})
+		contexto = {'viajes': viajes}
+		return render(request, 'administracion/reportes.html', {'contexto': contexto})
 	return render(request, 'administracion/reportes.html')
+
+def permisos(request,id_empleado):
+	bandera = False
+	usuario_actual = request.user.id
+	empleado = Empleado.objects.filter(usuario = usuario_actual)
+	if empleado.exists() == True:
+		empleado = Empleado.objects.filter(id = id_empleado)
+		if empleado.exists() == True:
+			bandera = True
+			empleado = Empleado.objects.get(id = id_empleado)
+
+	if bandera == True:
+		return render(request, 'administracion/permisos.html',{'empleado':empleado})
+	return render(request, 'administracion/permisos.html')

@@ -16,4 +16,5 @@ urlpatterns = [
 	path('perfil/<int:id_empleado>',PerfilEmpleado, name = 'perfil'),
 	path('panel/',Panel, name = 'panel'),
 	path('reportes/', Reportes, name = 'reportes'),
+	path('permisos/<int:id_empleado>',permisos, name = 'permisos'),
 ]
